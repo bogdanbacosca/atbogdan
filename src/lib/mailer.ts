@@ -62,7 +62,7 @@ export async function sendContactEmail(data: ContactFormData): Promise<SendConta
   // verified in Resend, it can only deliver to the address that owns the
   // Resend account. After verifying your domain, set CONTACT_FROM_EMAIL.
   const from = process.env.CONTACT_FROM_EMAIL?.trim() || "contact@atbogdan.ro";
-  const to = (process.env.CONTACT_TO_EMAIL?.trim() || "bogdanbacosca@protonmail.com")
+  const to = (process.env.CONTACT_TO_EMAIL?.trim() || "bogdanbacosca@gmail.com")
     .split(",")
     .map((address) => address.trim())
     .filter(Boolean);
