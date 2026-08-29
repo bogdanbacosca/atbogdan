@@ -11,21 +11,21 @@ export function CtaBand() {
       <div className="mx-auto flex max-w-[1240px] flex-col items-start justify-between gap-6 px-5 py-12 md:flex-row md:items-center md:px-8 md:py-14 lg:px-12">
         <div>
           <h2 className="font-display text-title text-cream">
-            <AnimatedWords text={cta.title} stagger={0.055} />
+            <AnimatedWords text={cta.title} delay={0} stagger={0.055} />
           </h2>
           <p className="mt-3 text-lead text-muted">
-            <AnimatedText text={cta.body} delay={0.2} />
+            <AnimatedText text={cta.body} delay={0.15} />
           </p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row">
-          <FadeUp delay={0.2} className="w-fit">
+          <FadeUp delay={0.25} className="w-fit">
             <Magnetic>
               <Button asChild size="lg">
                 <Link to="/contact">{cta.button}</Link>
               </Button>
             </Magnetic>
           </FadeUp>
-          <FadeUp delay={0.3} className="w-fit">
+          <FadeUp delay={0.35} className="w-fit">
             <Button asChild variant="outline" size="lg">
               <a href={site.phoneHref}>Sună {site.phonePretty}</a>
             </Button>

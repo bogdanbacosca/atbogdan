@@ -43,12 +43,12 @@ function ProjectPage() {
           </p>
         </FadeUp>
         <h1 className="mt-3 font-display text-display text-cream">
-          <AnimatedChars text={project.domain} delay={0.1} stagger={0.035} />
+          <AnimatedChars text={project.domain} delay={0.18} stagger={0.035} />
         </h1>
         <p className="mt-5 max-w-2xl text-lead text-muted">
-          <AnimatedText text={project.services} delay={0.25} stagger={0.01} />
+          <AnimatedText text={project.services} delay={0.38} stagger={0.01} />
         </p>
-        <FadeUp delay={0.35} className="mt-6 w-fit">
+        <FadeUp delay={0.5} className="mt-6 w-fit">
           <Button asChild variant="outline">
             <a href={project.url} target="_blank" rel="noreferrer">
               Vizitează site-ul
@@ -68,20 +68,20 @@ function ProjectPage() {
         <div className="mt-12 grid gap-10 lg:grid-cols-[1.2fr_0.8fr]">
           <div>
             <h2 className="font-display text-2xl text-cream">
-              <AnimatedWords text="Descriere" stagger={0.05} />
+              <AnimatedWords text="Descriere" delay={0.06} stagger={0.05} />
             </h2>
             <p className="mt-4 text-muted">
-              <AnimatedText text={project.description} delay={0.1} stagger={0.006} />
+              <AnimatedText text={project.description} delay={0.14} stagger={0.006} />
             </p>
             <h2 className="mt-10 font-display text-2xl text-cream">
-              <AnimatedWords text="Elemente cheie" stagger={0.045} />
+              <AnimatedWords text="Elemente cheie" delay={0.2} stagger={0.045} />
             </h2>
             <ul className="mt-4 space-y-3">
               {project.highlights.map((item, hi) => (
                 <FadeUp
                   as="li"
                   key={item}
-                  delay={0.12 + hi * 0.06}
+                  delay={0.24 + hi * 0.06}
                   className="border-l-2 border-primary pl-4 text-muted"
                 >
                   {item}
@@ -91,10 +91,10 @@ function ProjectPage() {
           </div>
           <aside className="rounded-xl border border-border bg-surface p-6">
             <h2 className="font-display text-2xl text-cream">
-              <AnimatedWords text="Rezultat final" stagger={0.045} />
+              <AnimatedWords text="Rezultat final" delay={0.06} stagger={0.045} />
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-muted">
-              <AnimatedText text={project.result} delay={0.15} stagger={0.006} />
+              <AnimatedText text={project.result} delay={0.12} stagger={0.006} />
             </p>
           </aside>
         </div>
@@ -102,7 +102,7 @@ function ProjectPage() {
         {others.length > 0 ? (
           <div className="mt-16">
             <h2 className="font-display text-2xl text-cream">
-              <AnimatedWords text="Alte proiecte" stagger={0.045} />
+              <AnimatedWords text="Alte proiecte" delay={0.06} stagger={0.045} />
             </h2>
             <div className="mt-6 grid gap-4 md:grid-cols-2">
               {others.map((item, oi) => (
@@ -121,13 +121,13 @@ function ProjectPage() {
                       <p className="font-display text-xl text-cream transition-colors duration-300 group-hover:text-blush">
                         <AnimatedWords
                           text={item.domain}
-                          delay={0.12}
+                          delay={0.12 + oi * 0.08}
                           stagger={0.03}
                           innerClassName="transition-colors duration-300"
                         />
                       </p>
                       <p className="mt-1 text-sm text-muted">
-                        <FadeUp as="span" delay={0.2}>
+                        <FadeUp as="span" delay={0.2 + oi * 0.08}>
                           {item.role}
                         </FadeUp>
                       </p>

@@ -19,13 +19,13 @@ function ContactPage() {
       <section className="mx-auto grid max-w-[1240px] gap-10 px-5 py-10 md:px-8 md:py-14 lg:grid-cols-[0.9fr_1.1fr] lg:px-12 lg:py-16">
         <div>
           <p className="text-xs tracking-[0.22em] text-primary uppercase">
-            <AnimatedChars text={contactCopy.talk} stagger={0.025} />
+            <AnimatedChars text={contactCopy.talk} delay={0} stagger={0.025} />
           </p>
           <h1 className="mt-3 font-display text-title text-cream">
-            <AnimatedWords text={contactCopy.title} stagger={0.055} />
+            <AnimatedWords text={contactCopy.title} delay={0.1} stagger={0.055} />
           </h1>
           <p className="mt-4 text-lead text-muted">
-            <AnimatedText text={contactCopy.body} delay={0.18} />
+            <AnimatedText text={contactCopy.body} delay={0.3} />
           </p>
 
           <ul className="mt-10 space-y-5">
@@ -33,9 +33,9 @@ function ContactPage() {
               <Phone className="mt-0.5 size-5 text-primary" />
               <div>
                 <p className="text-xs tracking-[0.16em] text-muted uppercase">
-                  <AnimatedChars text="Telefon" delay={0.12} stagger={0.02} />
+                  <AnimatedChars text="Telefon" delay={0.5} stagger={0.02} />
                 </p>
-                <FadeUp as="span" delay={0.2} className="mt-0.5 block w-fit">
+                <FadeUp as="span" delay={0.6} className="mt-0.5 block w-fit">
                   <a href={site.phoneHref} className="link-underline text-cream hover:text-primary">
                     {site.phonePretty}
                   </a>
@@ -46,9 +46,9 @@ function ContactPage() {
               <Mail className="mt-0.5 size-5 text-primary" />
               <div>
                 <p className="text-xs tracking-[0.16em] text-muted uppercase">
-                  <AnimatedChars text="Email" delay={0.2} stagger={0.02} />
+                  <AnimatedChars text="Email" delay={0.7} stagger={0.02} />
                 </p>
-                <FadeUp as="span" delay={0.28} className="mt-0.5 block w-fit">
+                <FadeUp as="span" delay={0.78} className="mt-0.5 block w-fit">
                   <a
                     href={`mailto:${site.email}`}
                     className="link-underline text-cream hover:text-primary"
@@ -62,9 +62,9 @@ function ContactPage() {
               <MapPin className="mt-0.5 size-5 text-primary" />
               <div>
                 <p className="text-xs tracking-[0.16em] text-muted uppercase">
-                  <AnimatedChars text="Adresă" delay={0.28} stagger={0.02} />
+                  <AnimatedChars text="Adresă" delay={0.9} stagger={0.02} />
                 </p>
-                <FadeUp as="span" delay={0.36} className="mt-0.5 block w-fit text-cream">
+                <FadeUp as="span" delay={0.98} className="mt-0.5 block w-fit text-cream">
                   {site.location}
                 </FadeUp>
               </div>
@@ -73,9 +73,9 @@ function ContactPage() {
               <Github className="mt-0.5 size-5 text-primary" />
               <div>
                 <p className="text-xs tracking-[0.16em] text-muted uppercase">
-                  <AnimatedChars text={contactCopy.follow} delay={0.36} stagger={0.018} />
+                  <AnimatedChars text={contactCopy.follow} delay={1.1} stagger={0.018} />
                 </p>
-                <FadeUp as="span" delay={0.44} className="mt-0.5 block w-fit">
+                <FadeUp as="span" delay={1.18} className="mt-0.5 block w-fit">
                   <a
                     href={site.github}
                     target="_blank"
@@ -89,7 +89,7 @@ function ContactPage() {
             </li>
           </ul>
 
-          <FadeUp delay={0.3}>
+          <FadeUp delay={1.3}>
             <p className="mt-10 text-sm text-muted">
               {contactCopy.leave} sau {contactCopy.call}{" "}
               <a

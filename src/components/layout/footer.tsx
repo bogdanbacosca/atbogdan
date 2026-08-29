@@ -16,37 +16,37 @@ export function Footer() {
         </div>
         <div>
           <p className="text-xs tracking-[0.18em] text-muted uppercase">
-            <AnimatedChars text="Contact" stagger={0.025} />
+            <AnimatedChars text="Contact" delay={0.08} stagger={0.025} />
           </p>
           <ul className="mt-4 space-y-2 text-sm">
-            <FadeUp as="li" delay={0.1}>
+            <FadeUp as="li" delay={0.13}>
               <a href={site.phoneHref} className="link-underline w-fit hover:text-primary">
                 {site.phonePretty}
               </a>
             </FadeUp>
-            <FadeUp as="li" delay={0.15}>
+            <FadeUp as="li" delay={0.18}>
               <a href={`mailto:${site.email}`} className="link-underline w-fit hover:text-primary">
                 {site.email}
               </a>
             </FadeUp>
-            <FadeUp as="li" delay={0.2} className="text-muted">
+            <FadeUp as="li" delay={0.23} className="text-muted">
               {site.location}
             </FadeUp>
           </ul>
         </div>
         <div>
           <p className="text-xs tracking-[0.18em] text-muted uppercase">
-            <AnimatedChars text="Navigare" stagger={0.025} />
+            <AnimatedChars text="Navigare" delay={0.32} stagger={0.025} />
           </p>
           <ul className="mt-4 space-y-2 text-sm">
             {nav.map((item, ni) => (
-              <FadeUp as="li" key={item.href} delay={0.1 + ni * 0.05}>
+              <FadeUp as="li" key={item.href} delay={0.38 + ni * 0.05}>
                 <Link to={item.href} className="link-underline w-fit hover:text-primary">
                   {item.label}
                 </Link>
               </FadeUp>
             ))}
-            <FadeUp as="li" delay={0.1 + nav.length * 0.05}>
+            <FadeUp as="li" delay={0.38 + nav.length * 0.05}>
               <a
                 href={site.github}
                 target="_blank"
@@ -60,7 +60,7 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-border">
-        <FadeUp delay={0.15}>
+        <FadeUp delay={0.55}>
           <p className="mx-auto max-w-[1240px] px-5 py-5 text-xs text-muted md:px-8 lg:px-12">
             Drepturi de autor © {new Date().getFullYear()} Bogdan Bacoșcă
           </p>

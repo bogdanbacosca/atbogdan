@@ -14,7 +14,7 @@ export function Packages() {
         <AnimatedChars text="Pachete de servicii" stagger={0.022} />
       </p>
       <h2 className="mt-3 font-display text-title text-cream">
-        <AnimatedWords text="Alege planul potrivit" stagger={0.055} />
+        <AnimatedWords text="Alege planul potrivit" delay={0.15} stagger={0.055} />
       </h2>
 
       <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -34,17 +34,17 @@ export function Packages() {
                   plan.featured ? "text-cream/80" : "text-primary",
                 )}
               >
-                <AnimatedChars text={plan.subtitle} delay={0.08} stagger={0.022} />
+                <AnimatedChars text={plan.subtitle} delay={0.08 + i * 0.1} stagger={0.022} />
               </p>
               <h3 className="mt-2 font-display text-3xl">
-                <AnimatedWords text={plan.name} delay={0.14} stagger={0.05} />
+                <AnimatedWords text={plan.name} delay={0.14 + i * 0.1} stagger={0.05} />
               </h3>
               <ul className="mt-6 flex-1 space-y-3">
                 {plan.features.map((feature, fi) => (
                   <FadeUp
                     as="li"
                     key={feature}
-                    delay={0.2 + fi * 0.05}
+                    delay={0.2 + i * 0.1 + fi * 0.05}
                     className="flex items-start gap-2 text-sm"
                   >
                     <Check className="mt-0.5 size-4 shrink-0 transition-transform duration-300 group-hover:scale-110" />
@@ -52,7 +52,7 @@ export function Packages() {
                   </FadeUp>
                 ))}
               </ul>
-              <FadeUp delay={0.2 + plan.features.length * 0.05} className="mt-8">
+              <FadeUp delay={0.2 + i * 0.1 + plan.features.length * 0.05} className="mt-8">
                 <Button asChild className="w-full" variant={plan.featured ? "cream" : "outline"}>
                   <Link to="/contact">Alege plan</Link>
                 </Button>

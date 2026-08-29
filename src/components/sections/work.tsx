@@ -16,7 +16,7 @@ export function Work({ limit }: { limit?: number }) {
             <AnimatedChars text="Portofoliu" stagger={0.03} />
           </p>
           <h2 className="mt-3 font-display text-title text-cream">
-            <AnimatedWords text="Proiecte selectate" stagger={0.055} />
+            <AnimatedWords text="Proiecte selectate" delay={0.12} stagger={0.055} />
           </h2>
         </div>
         {limit ? (
@@ -54,7 +54,7 @@ export function Work({ limit }: { limit?: number }) {
                   <p className="font-mono text-sm tracking-[0.18em] text-primary transition-colors duration-300 group-hover:text-cream">
                     <AnimatedChars
                       text={String(i + 1).padStart(2, "0")}
-                      delay={0.08}
+                      delay={0.08 + i * 0.12}
                       stagger={0.05}
                       innerClassName="transition-colors duration-300"
                     />
@@ -62,21 +62,21 @@ export function Work({ limit }: { limit?: number }) {
                   <h3 className="mt-2 font-display text-3xl text-cream transition-colors duration-300 group-hover:text-blush md:text-4xl">
                     <AnimatedChars
                       text={project.domain}
-                      delay={0.14}
+                      delay={0.14 + i * 0.12}
                       stagger={0.022}
                       innerClassName="transition-colors duration-300"
                     />
                   </h3>
                   <p className="mt-2 text-sm text-muted">
-                    <FadeUp as="span" delay={0.22}>
+                    <FadeUp as="span" delay={0.22 + i * 0.12}>
                       {project.role}
                     </FadeUp>
                   </p>
                   <p className="mt-4 line-clamp-4 text-muted">
-                    <AnimatedText text={project.description} delay={0.24} stagger={0.008} />
+                    <AnimatedText text={project.description} delay={0.24 + i * 0.12} stagger={0.008} />
                   </p>
                 </Link>
-                <FadeUp as="span" delay={0.32} className="mt-5 inline-flex">
+                <FadeUp as="span" delay={0.32 + i * 0.12} className="mt-5 inline-flex">
                   <a
                     href={project.url}
                     target="_blank"

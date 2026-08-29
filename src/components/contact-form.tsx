@@ -59,7 +59,7 @@ export function ContactForm() {
       noValidate
     >
       <h3 className="font-display text-2xl text-cream">
-        <AnimatedWords text={contactCopy.send} stagger={0.05} />
+        <AnimatedWords text={contactCopy.send} delay={0.06} stagger={0.05} />
       </h3>
       <div className="grid gap-4 md:grid-cols-2">
         <FadeUp className="space-y-2" delay={0.1}>

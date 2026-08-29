@@ -9,7 +9,7 @@ export function Services() {
         <AnimatedChars text="Servicii" stagger={0.03} />
       </p>
       <h2 className="mt-3 max-w-2xl font-display text-title text-cream">
-        <AnimatedWords text="De la identitate vizuală la un site care vinde" stagger={0.05} />
+        <AnimatedWords text="De la identitate vizuală la un site care vinde" delay={0.15} stagger={0.05} />
       </h2>
 
       <div className="mt-10 divide-y divide-border border-y border-border">
@@ -19,7 +19,7 @@ export function Services() {
               <p className="font-mono text-sm tracking-[0.18em] text-primary transition-colors duration-300 group-hover:text-cream">
                 <AnimatedChars
                   text={item.index}
-                  delay={0.06}
+                  delay={0.06 + i * 0.1}
                   stagger={0.05}
                   innerClassName="transition-colors duration-300"
                 />
@@ -28,13 +28,13 @@ export function Services() {
                 <h3 className="font-display text-2xl text-cream transition-colors duration-300 group-hover:text-blush md:text-3xl">
                   <AnimatedWords
                     text={item.title}
-                    delay={0.12}
+                    delay={0.12 + i * 0.1}
                     stagger={0.05}
                     innerClassName="transition-colors duration-300"
                   />
                 </h3>
                 <p className="mt-3 max-w-2xl text-muted">
-                  <AnimatedText text={item.body} delay={0.18} stagger={0.008} />
+                  <AnimatedText text={item.body} delay={0.18 + i * 0.1} stagger={0.008} />
                 </p>
               </div>
               <div className="hidden overflow-hidden rounded-lg lg:block">
