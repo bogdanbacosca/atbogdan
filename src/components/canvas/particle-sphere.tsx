@@ -39,14 +39,36 @@ export function ParticleSphere({ className }: { className?: string }) {
     let rotY = 0.55;
     let rotX = 0.22;
     let frame = 0;
-    let running = true;
+    let disposed = false;
+    let rafQueued = false;
 
-    const resize = () => {
+    let dpr = 0; // 0 forces a bitmap sync on the very first frame
+    let lastW = 0;
+    let lastH = 0;
+
+    // Keep the canvas bitmap in sync with the laid-out CSS size AND the current
+    // devicePixelRatio. On first load the stylesheet/grid/fonts can settle after
+    // this effect runs, and browser zoom (or Windows display scaling) changes dpr
+    // without touching layout — so a one-shot measure at mount used to freeze a
+    // stale, cropped sphere until the next window resize. A per-frame guard for
+    // size + dpr, a ResizeObserver, fonts.ready and visibility resyncs remove
+    // that dependency entirely.
+    const syncBitmap = () => {
       const rect = canvas.getBoundingClientRect();
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = Math.max(1, Math.floor(rect.width * dpr));
-      canvas.height = Math.max(1, Math.floor(rect.height * dpr));
+      const w = Math.round(rect.width);
+      const h = Math.round(rect.height);
+      if (w < 2 || h < 2) return false;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const bw = Math.max(1, Math.floor(w * dpr));
+      const bh = Math.max(1, Math.floor(h * dpr));
+      if (canvas.width !== bw || canvas.height !== bh) {
+        canvas.width = bw;
+        canvas.height = bh;
+      }
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      lastW = w;
+      lastH = h;
+      return true;
     };
 
     const onMove = (event: PointerEvent) => {
@@ -55,11 +77,29 @@ export function ParticleSphere({ className }: { className?: string }) {
       mouse.ty = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
     };
 
-    const draw = () => {
-      if (!running) return;
+    const schedule = () => {
+      if (disposed || rafQueued) return;
+      rafQueued = true;
+      requestAnimationFrame(step);
+    };
+
+    const step = () => {
+      rafQueued = false;
+      if (disposed) return;
       const rect = canvas.getBoundingClientRect();
       const w = rect.width;
       const h = rect.height;
+      if (w < 2 || h < 2) {
+        // Layout not settled yet (first frames, font swap, grid resolve) —
+        // retry on the next frame. Never bail out permanently: an early
+        // return here used to kill the loop and freeze a cropped sphere.
+        schedule();
+        return;
+      }
+      const nextDpr = Math.min(window.devicePixelRatio || 1, 2);
+      if (Math.round(w) !== lastW || Math.round(h) !== lastH || nextDpr !== dpr) {
+        syncBitmap();
+      }
       ctx.clearRect(0, 0, w, h);
 
       mouse.x += (mouse.tx - mouse.x) * 0.07;
@@ -72,7 +112,14 @@ export function ParticleSphere({ className }: { className?: string }) {
 
       const cx = w / 2;
       const cy = h / 2;
-      const scale = Math.min(w, h) * 0.42;
+      // Interaction values scale with the canvas so the sphere keeps the same
+      // safety margin at every size — hover can never push particles out of view.
+      const unit = Math.min(w, h);
+      const scale = unit * 0.4;
+      const shiftX = unit * 0.06;
+      const shiftY = unit * 0.045;
+      const repelRadius = unit * 0.22;
+      const repelPush = unit * 0.035;
       const cosY = Math.cos(rotY);
       const sinY = Math.sin(rotY);
       const cosX = Math.cos(rotX);
@@ -99,10 +146,10 @@ export function ParticleSphere({ className }: { className?: string }) {
 
       for (const p of projected) {
         const t = (p.z + 1) / 2;
-        const dx = p.px - (cx + mouse.x * 30);
-        const dy = p.py - (cy + mouse.y * 24);
+        const dx = p.px - (cx + mouse.x * shiftX);
+        const dy = p.py - (cy + mouse.y * shiftY);
         const dist = Math.sqrt(dx * dx + dy * dy);
-        const push = Math.max(0, 1 - dist / 90) * 16;
+        const push = Math.max(0, 1 - dist / repelRadius) * repelPush;
         const px = p.px + (dx / (dist || 1)) * push;
         const py = p.py + (dy / (dist || 1)) * push;
         const size = Math.max(0.7, (p.z + 1.25) * 1.7);
@@ -117,20 +164,43 @@ export function ParticleSphere({ className }: { className?: string }) {
         ctx.fill();
       }
 
+      if (frame === 0) canvas.style.opacity = "1"; // fade in on first painted frame
       frame += 1;
-      if (!reduce || frame < 2) requestAnimationFrame(draw);
+      if (!reduce || frame < 2) schedule();
     };
 
-    resize();
-    draw();
-    window.addEventListener("resize", resize);
+    // Any external change (resize, zoom, font swap, tab return) re-syncs — and
+    // in reduced-motion mode, where the loop has finished, it paints a fresh
+    // frame too. For regular motion the live loop self-heals every frame.
+    const resync = () => {
+      syncBitmap();
+      if (reduce) step();
+    };
+
+    syncBitmap();
+    step();
+    const observer = new ResizeObserver(resync);
+    observer.observe(canvas);
+    window.addEventListener("resize", resync);
+    window.addEventListener("load", resync);
+    document.addEventListener("visibilitychange", resync);
+    document.fonts?.ready.then(resync).catch(() => {});
     canvas.addEventListener("pointermove", onMove);
     return () => {
-      running = false;
-      window.removeEventListener("resize", resize);
+      disposed = true;
+      observer.disconnect();
+      window.removeEventListener("resize", resync);
+      window.removeEventListener("load", resync);
+      document.removeEventListener("visibilitychange", resync);
       canvas.removeEventListener("pointermove", onMove);
     };
   }, []);
 
-  return <canvas ref={canvasRef} className={cn("h-full w-full", className)} aria-hidden="true" />;
+  return (
+    <canvas
+      ref={canvasRef}
+      className={cn("h-full w-full opacity-0 transition-opacity duration-700 ease-out", className)}
+      aria-hidden="true"
+    />
+  );
 }

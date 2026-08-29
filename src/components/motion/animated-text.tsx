@@ -1,5 +1,6 @@
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
+import { useHydrationSafeReduce } from "./use-hydration-safe-reduce";
 
 type AnimatedWordsProps = {
   text: string;
@@ -14,7 +15,7 @@ type AnimatedWordsProps = {
  * The full string stays available to screen readers via aria-label.
  */
 export function AnimatedWords({ text, className, delay = 0, stagger = 0.05 }: AnimatedWordsProps) {
-  const reduce = useReducedMotion();
+  const reduce = useHydrationSafeReduce();
   const words = text.split(" ");
 
   if (reduce) {

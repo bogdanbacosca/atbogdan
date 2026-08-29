@@ -59,7 +59,7 @@ export function Hero() {
             sphere stays visible on laptops (768–1023px), not just at lg. */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 top-1/2 z-0 mx-auto w-[min(118vw,600px)] -translate-y-1/2 opacity-40 md:pointer-events-auto md:static md:z-auto md:w-auto md:translate-y-0 md:opacity-100"
+          className="pointer-events-none absolute inset-x-0 top-1/2 z-0 mx-auto w-[min(118vw,600px)] -translate-y-1/2 opacity-40 md:pointer-events-auto md:static md:z-auto md:w-full md:translate-y-0 md:opacity-100"
         >
           <div className="relative mx-auto aspect-square w-full max-w-[520px] md:max-w-none">
             <div className="absolute inset-[12%] rounded-full bg-primary/20 blur-3xl" />

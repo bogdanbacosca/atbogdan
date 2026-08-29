@@ -1,5 +1,6 @@
-import { motion, useMotionValue, useReducedMotion, useSpring } from "motion/react";
+import { motion, useMotionValue, useSpring } from "motion/react";
 import { useRef, type ReactNode } from "react";
+import { useHydrationSafeReduce } from "./use-hydration-safe-reduce";
 
 type MagneticProps = {
   children: ReactNode;
@@ -7,13 +8,15 @@ type MagneticProps = {
   strength?: number;
 };
 
-export function Magnetic({ children, className, strength = 0.28 }: MagneticProps) {
-  const reduce = useReducedMotion();
+export function Magnetic({ children, className, strength = 0.18 }: MagneticProps) {
+  const reduce = useHydrationSafeReduce();
   const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-  const springX = useSpring(x, { stiffness: 260, damping: 18, mass: 0.35 });
-  const springY = useSpring(y, { stiffness: 260, damping: 18, mass: 0.35 });
+  // Overdamped spring: smooth follow, no oscillation, so it never reads as
+  // shaking and never fights the button's own press animation.
+  const springX = useSpring(x, { stiffness: 170, damping: 26, mass: 0.5 });
+  const springY = useSpring(y, { stiffness: 170, damping: 26, mass: 0.5 });
 
   if (reduce) {
     return <div className={className}>{children}</div>;

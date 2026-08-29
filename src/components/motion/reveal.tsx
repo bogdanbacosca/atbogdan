@@ -1,6 +1,7 @@
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { useHydrationSafeReduce } from "./use-hydration-safe-reduce";
 
 type RevealProps = {
   children: ReactNode;
@@ -10,7 +11,7 @@ type RevealProps = {
 };
 
 export function Reveal({ children, className, delay = 0, y = 16 }: RevealProps) {
-  const reduce = useReducedMotion();
+  const reduce = useHydrationSafeReduce();
 
   if (reduce) {
     return <div className={className}>{children}</div>;

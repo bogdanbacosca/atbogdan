@@ -51,7 +51,7 @@ export function Footer() {
       </div>
       <div className="border-t border-border">
         <p className="mx-auto max-w-[1240px] px-5 py-5 text-xs text-muted md:px-8 lg:px-12">
-          Drepturi de autor © {new Date().getFullYear()} {site.legalName}
+          Drepturi de autor © {new Date().getFullYear()} Bogdan Bacoșcă
         </p>
       </div>
     </footer>
