@@ -1,20 +1,15 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { SiteShell } from "@/components/layout/site-shell";
-import { CtaBand } from "@/components/sections/cta";
-import { Work } from "@/components/sections/work";
+import { createFileRoute, Outlet } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/portofoliu")({
-  component: PortfolioPage,
-  head: () => ({
-    meta: [{ title: "Portofoliu — @Bogdan" }],
-  }),
+  component: PortfolioLayout,
 });
 
-function PortfolioPage() {
-  return (
-    <SiteShell>
-      <Work />
-      <CtaBand />
-    </SiteShell>
-  );
+/**
+ * Layout route for /portofoliu. The file-based router treats
+ * portofoliu.index.tsx (listing) and portofoliu.$slug.tsx (project detail)
+ * as children of this route, so it must render <Outlet /> for their content
+ * to appear.
+ */
+function PortfolioLayout() {
+  return <Outlet />;
 }

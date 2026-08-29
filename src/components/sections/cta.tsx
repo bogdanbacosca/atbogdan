@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { cta, site } from "@/lib/site";
-import { Reveal } from "@/components/motion/reveal";
-import { AnimatedWords } from "@/components/motion/animated-text";
+import { AnimatedText, AnimatedWords } from "@/components/motion/animated-text";
+import { FadeUp } from "@/components/motion/fade-up";
 import { Magnetic } from "@/components/motion/magnetic";
 import { Button } from "@/components/ui/button";
 
@@ -13,22 +13,24 @@ export function CtaBand() {
           <h2 className="font-display text-title text-cream">
             <AnimatedWords text={cta.title} stagger={0.055} />
           </h2>
-          <Reveal delay={0.2}>
-            <p className="mt-3 text-lead text-muted">{cta.body}</p>
-          </Reveal>
+          <p className="mt-3 text-lead text-muted">
+            <AnimatedText text={cta.body} delay={0.2} />
+          </p>
         </div>
-        <Reveal delay={0.08}>
-          <div className="flex flex-col gap-3 sm:flex-row">
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <FadeUp delay={0.2} className="w-fit">
             <Magnetic>
               <Button asChild size="lg">
                 <Link to="/contact">{cta.button}</Link>
               </Button>
             </Magnetic>
+          </FadeUp>
+          <FadeUp delay={0.3} className="w-fit">
             <Button asChild variant="outline" size="lg">
               <a href={site.phoneHref}>Sună {site.phonePretty}</a>
             </Button>
-          </div>
-        </Reveal>
+          </FadeUp>
+        </div>
       </div>
     </section>
   );

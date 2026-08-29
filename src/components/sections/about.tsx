@@ -1,20 +1,21 @@
 import { about, differentiators } from "@/lib/site";
 import { Reveal } from "@/components/motion/reveal";
-import { AnimatedWords } from "@/components/motion/animated-text";
+import { AnimatedChars, AnimatedText, AnimatedWords } from "@/components/motion/animated-text";
+import { FadeUp } from "@/components/motion/fade-up";
 import { ArrowUpRight } from "lucide-react";
 
 export function About() {
   return (
     <section id="despre" className="mx-auto max-w-[1240px] px-5 py-10 md:px-8 md:py-14 lg:px-12">
-      <Reveal>
-        <p className="text-xs tracking-[0.22em] text-primary uppercase">{about.eyebrow}</p>
-      </Reveal>
+      <p className="text-xs tracking-[0.22em] text-primary uppercase">
+        <AnimatedChars text={about.eyebrow} stagger={0.025} />
+      </p>
       <h2 className="mt-3 max-w-3xl font-display text-title text-cream">
         <AnimatedWords text={about.title} stagger={0.055} />
       </h2>
-      <Reveal delay={0.2}>
-        <p className="mt-6 max-w-3xl text-lead text-muted">{about.body}</p>
-      </Reveal>
+      <p className="mt-6 max-w-3xl text-lead text-muted">
+        <AnimatedText text={about.body} delay={0.15} stagger={0.006} />
+      </p>
 
       <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {differentiators.map((item, i) => (
@@ -33,13 +34,23 @@ export function About() {
                 />
               </div>
               <div className="flex flex-1 flex-col p-5 md:p-6">
-                <p className="text-xs tracking-[0.16em] text-primary uppercase">{item.eyebrow}</p>
-                <h3 className="mt-2 font-display text-2xl text-cream">{item.title}</h3>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">{item.body}</p>
-                <span className="mt-5 inline-flex items-center gap-1 text-sm text-cream transition-colors duration-300 group-hover:text-primary">
+                <p className="text-xs tracking-[0.16em] text-primary uppercase">
+                  <AnimatedChars text={item.eyebrow} delay={0.1} stagger={0.02} />
+                </p>
+                <h3 className="mt-2 font-display text-2xl text-cream">
+                  <AnimatedWords text={item.title} delay={0.16} stagger={0.05} />
+                </h3>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">
+                  <AnimatedText text={item.body} delay={0.22} stagger={0.008} />
+                </p>
+                <FadeUp
+                  as="span"
+                  delay={0.3}
+                  className="mt-5 inline-flex items-center gap-1 text-sm text-cream transition-colors duration-300 group-hover:text-primary"
+                >
                   {item.cta}
                   <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </span>
+                </FadeUp>
               </div>
             </a>
           </Reveal>

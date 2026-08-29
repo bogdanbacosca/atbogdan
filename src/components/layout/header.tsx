@@ -2,6 +2,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { FadeUp } from "@/components/motion/fade-up";
 import { Magnetic } from "@/components/motion/magnetic";
 import { nav, site } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -50,29 +51,32 @@ export function Header() {
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex lg:gap-8" aria-label="Principal">
-          {nav.map((item) => {
+          {nav.map((item, ni) => {
             const active = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
             return (
-              <Link
-                key={item.href}
-                to={item.href}
-                className={cn(
-                  "link-underline text-sm tracking-wide transition-colors duration-200",
-                  active ? "text-cream" : "text-muted hover:text-cream",
-                )}
-              >
-                {item.label}
-              </Link>
+              <FadeUp as="span" key={item.href} delay={0.1 + ni * 0.06}>
+                <Link
+                  to={item.href}
+                  className={cn(
+                    "link-underline text-sm tracking-wide transition-colors duration-200",
+                    active ? "text-cream" : "text-muted hover:text-cream",
+                  )}
+                >
+                  {item.label}
+                </Link>
+              </FadeUp>
             );
           })}
         </nav>
 
         <div className="hidden lg:block">
-          <Magnetic>
-            <Button asChild size="sm">
-              <Link to="/contact">Contactează-mă</Link>
-            </Button>
-          </Magnetic>
+          <FadeUp delay={0.3} className="w-fit">
+            <Magnetic>
+              <Button asChild size="sm">
+                <Link to="/contact">Contactează-mă</Link>
+              </Button>
+            </Magnetic>
+          </FadeUp>
         </div>
 
         <button

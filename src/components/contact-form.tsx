@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { AnimatedWords } from "@/components/motion/animated-text";
+import { FadeUp } from "@/components/motion/fade-up";
 import { contactCopy } from "@/lib/site";
 import { submitContactForm } from "@/lib/contact";
 
@@ -56,16 +58,18 @@ export function ContactForm() {
       className="space-y-4 rounded-xl border border-border bg-surface p-5 md:p-7"
       noValidate
     >
-      <h3 className="font-display text-2xl text-cream">{contactCopy.send}</h3>
+      <h3 className="font-display text-2xl text-cream">
+        <AnimatedWords text={contactCopy.send} stagger={0.05} />
+      </h3>
       <div className="grid gap-4 md:grid-cols-2">
-        <div className="space-y-2">
+        <FadeUp className="space-y-2" delay={0.1}>
           <Label htmlFor="name">Nume complet</Label>
           <Input id="name" autoComplete="name" {...form.register("name")} />
           {form.formState.errors.name ? (
             <p className="text-sm text-primary">{form.formState.errors.name.message}</p>
           ) : null}
-        </div>
-        <div className="space-y-2">
+        </FadeUp>
+        <FadeUp className="space-y-2" delay={0.16}>
           <Label htmlFor="email">Adresă de email</Label>
           <Input
             id="email"
@@ -76,25 +80,27 @@ export function ContactForm() {
           {form.formState.errors.email ? (
             <p className="text-sm text-primary">{form.formState.errors.email.message}</p>
           ) : null}
-        </div>
+        </FadeUp>
       </div>
-      <div className="space-y-2">
+      <FadeUp className="space-y-2" delay={0.22}>
         <Label htmlFor="subject">Subiect</Label>
         <Input id="subject" {...form.register("subject")} />
         {form.formState.errors.subject ? (
           <p className="text-sm text-primary">{form.formState.errors.subject.message}</p>
         ) : null}
-      </div>
-      <div className="space-y-2">
+      </FadeUp>
+      <FadeUp className="space-y-2" delay={0.28}>
         <Label htmlFor="message">Mesaj</Label>
         <Textarea id="message" rows={6} {...form.register("message")} />
         {form.formState.errors.message ? (
           <p className="text-sm text-primary">{form.formState.errors.message.message}</p>
         ) : null}
-      </div>
-      <Button type="submit" size="lg" className="w-full md:w-auto" disabled={isLoading}>
-        {isLoading ? "Se trimite…" : contactCopy.submit}
-      </Button>
+      </FadeUp>
+      <FadeUp delay={0.34} className="w-full md:w-fit">
+        <Button type="submit" size="lg" className="w-full md:w-auto" disabled={isLoading}>
+          {isLoading ? "Se trimite…" : contactCopy.submit}
+        </Button>
+      </FadeUp>
       {formStatus === "success" ? (
         <p role="status" data-testid="form-status" className="text-sm text-emerald-400">
           Mesajul a fost trimis. Îți mulțumesc! Îți răspund în cel mai scurt timp.

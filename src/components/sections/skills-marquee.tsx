@@ -1,9 +1,10 @@
 import { skills } from "@/lib/site";
+import { FadeUp } from "@/components/motion/fade-up";
 
 export function SkillsMarquee() {
   const loop = [...skills, ...skills];
   return (
-    <div className="overflow-hidden border-y border-border bg-bg-elevated py-4">
+    <FadeUp className="overflow-hidden border-y border-border bg-bg-elevated py-4" y={0}>
       <div className="marquee-track gap-8 px-4">
         {loop.map((skill, i) => (
           <span
@@ -15,6 +16,6 @@ export function SkillsMarquee() {
           </span>
         ))}
       </div>
-    </div>
+    </FadeUp>
   );
 }

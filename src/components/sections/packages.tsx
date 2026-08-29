@@ -2,16 +2,17 @@ import { Link } from "@tanstack/react-router";
 import { Check } from "lucide-react";
 import { packages } from "@/lib/site";
 import { Reveal } from "@/components/motion/reveal";
-import { AnimatedWords } from "@/components/motion/animated-text";
+import { AnimatedChars, AnimatedWords } from "@/components/motion/animated-text";
+import { FadeUp } from "@/components/motion/fade-up";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export function Packages() {
   return (
     <section className="mx-auto max-w-[1240px] px-5 py-10 md:px-8 md:py-14 lg:px-12">
-      <Reveal>
-        <p className="text-xs tracking-[0.22em] text-primary uppercase">Pachete de servicii</p>
-      </Reveal>
+      <p className="text-xs tracking-[0.22em] text-primary uppercase">
+        <AnimatedChars text="Pachete de servicii" stagger={0.022} />
+      </p>
       <h2 className="mt-3 font-display text-title text-cream">
         <AnimatedWords text="Alege planul potrivit" stagger={0.055} />
       </h2>
@@ -33,20 +34,29 @@ export function Packages() {
                   plan.featured ? "text-cream/80" : "text-primary",
                 )}
               >
-                {plan.subtitle}
+                <AnimatedChars text={plan.subtitle} delay={0.08} stagger={0.022} />
               </p>
-              <h3 className="mt-2 font-display text-3xl">{plan.name}</h3>
+              <h3 className="mt-2 font-display text-3xl">
+                <AnimatedWords text={plan.name} delay={0.14} stagger={0.05} />
+              </h3>
               <ul className="mt-6 flex-1 space-y-3">
-                {plan.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-2 text-sm">
+                {plan.features.map((feature, fi) => (
+                  <FadeUp
+                    as="li"
+                    key={feature}
+                    delay={0.2 + fi * 0.05}
+                    className="flex items-start gap-2 text-sm"
+                  >
                     <Check className="mt-0.5 size-4 shrink-0 transition-transform duration-300 group-hover:scale-110" />
                     {feature}
-                  </li>
+                  </FadeUp>
                 ))}
               </ul>
-              <Button asChild className="mt-8 w-full" variant={plan.featured ? "cream" : "outline"}>
-                <Link to="/contact">Alege plan</Link>
-              </Button>
+              <FadeUp delay={0.2 + plan.features.length * 0.05} className="mt-8">
+                <Button asChild className="w-full" variant={plan.featured ? "cream" : "outline"}>
+                  <Link to="/contact">Alege plan</Link>
+                </Button>
+              </FadeUp>
             </article>
           </Reveal>
         ))}
