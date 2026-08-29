@@ -50,9 +50,7 @@ function renderFieldRow(label: string, value: string, shaded: boolean): string {
  * @returns The Resend email id of the sent message.
  * @throws {Error} Throws when the API key is missing or Resend rejects the send.
  */
-export async function sendContactEmail(
-  data: ContactFormData,
-): Promise<SendContactEmailResult> {
+export async function sendContactEmail(data: ContactFormData): Promise<SendContactEmailResult> {
   const apiKey = process.env.RESEND_API_KEY?.trim();
   if (!apiKey) {
     throw new Error(
@@ -63,8 +61,8 @@ export async function sendContactEmail(
   // "onboarding@resend.dev" is Resend's shared test sender: until a domain is
   // verified in Resend, it can only deliver to the address that owns the
   // Resend account. After verifying your domain, set CONTACT_FROM_EMAIL.
-  const from = process.env.CONTACT_FROM_EMAIL?.trim() || "onboarding@resend.dev";
-  const to = (process.env.CONTACT_TO_EMAIL?.trim() || "bogdanbacosca@gmail.com")
+  const from = process.env.CONTACT_FROM_EMAIL?.trim() || "contact@atbogdan.ro";
+  const to = (process.env.CONTACT_TO_EMAIL?.trim() || "bogdanbacosca@protonmail.com")
     .split(",")
     .map((address) => address.trim())
     .filter(Boolean);
@@ -96,9 +94,7 @@ export async function sendContactEmail(
   });
 
   if (error) {
-    throw new Error(
-      `Resend Email Error: ${error.message || error.name || "Unknown error"}`,
-    );
+    throw new Error(`Resend Email Error: ${error.message || error.name || "Unknown error"}`);
   }
 
   return { id: sent?.id ?? null };
