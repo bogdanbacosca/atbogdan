@@ -51,16 +51,13 @@ export function Header() {
 
         <nav className="hidden items-center gap-6 md:flex lg:gap-8" aria-label="Principal">
           {nav.map((item) => {
-            const active =
-              item.href === "/"
-                ? pathname === "/"
-                : pathname.startsWith(item.href);
+            const active = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
             return (
               <Link
                 key={item.href}
                 to={item.href}
                 className={cn(
-                  "text-sm tracking-wide transition-[color] duration-150",
+                  "link-underline text-sm tracking-wide transition-colors duration-200",
                   active ? "text-cream" : "text-muted hover:text-cream",
                 )}
               >

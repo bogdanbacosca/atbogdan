@@ -8,20 +8,18 @@ export function Footer() {
       <div className="mx-auto grid max-w-[1240px] gap-10 px-5 py-12 md:grid-cols-2 md:px-8 md:py-16 lg:grid-cols-4 lg:px-12">
         <div className="lg:col-span-2">
           <img src={site.logo} alt={site.name} className="h-9 w-auto" />
-          <p className="mt-4 max-w-md text-sm leading-relaxed text-muted">
-            {site.tagline}
-          </p>
+          <p className="mt-4 max-w-md text-sm leading-relaxed text-muted">{site.tagline}</p>
         </div>
         <div>
           <p className="text-xs tracking-[0.18em] text-muted uppercase">Contact</p>
           <ul className="mt-4 space-y-2 text-sm">
             <li>
-              <a href={site.phoneHref} className="hover:text-primary">
+              <a href={site.phoneHref} className="link-underline w-fit hover:text-primary">
                 {site.phonePretty}
               </a>
             </li>
             <li>
-              <a href={`mailto:${site.email}`} className="hover:text-primary">
+              <a href={`mailto:${site.email}`} className="link-underline w-fit hover:text-primary">
                 {site.email}
               </a>
             </li>
@@ -33,7 +31,7 @@ export function Footer() {
           <ul className="mt-4 space-y-2 text-sm">
             {nav.map((item) => (
               <li key={item.href}>
-                <Link to={item.href} className="hover:text-primary">
+                <Link to={item.href} className="link-underline w-fit hover:text-primary">
                   {item.label}
                 </Link>
               </li>
@@ -43,7 +41,7 @@ export function Footer() {
                 href={site.github}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-1 hover:text-primary"
+                className="link-underline inline-flex w-fit items-center gap-1 hover:text-primary"
               >
                 GitHub <ArrowUpRight className="size-3.5" />
               </a>

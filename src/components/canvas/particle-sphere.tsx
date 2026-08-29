@@ -33,7 +33,8 @@ export function ParticleSphere({ className }: { className?: string }) {
     if (!ctx) return;
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const points = fibonacciSphere(reduce ? 360 : 1100);
+    const compact = window.matchMedia("(max-width: 768px)").matches;
+    const points = fibonacciSphere(reduce ? 360 : compact ? 700 : 1100);
     const mouse = { x: 0, y: 0, tx: 0, ty: 0 };
     let rotY = 0.55;
     let rotX = 0.22;
@@ -131,11 +132,5 @@ export function ParticleSphere({ className }: { className?: string }) {
     };
   }, []);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      className={cn("h-full w-full", className)}
-      aria-hidden="true"
-    />
-  );
+  return <canvas ref={canvasRef} className={cn("h-full w-full", className)} aria-hidden="true" />;
 }

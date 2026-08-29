@@ -1,6 +1,8 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { SiteShell } from "@/components/layout/site-shell";
+import { AnimatedWords } from "@/components/motion/animated-text";
+import { Reveal } from "@/components/motion/reveal";
 import { CtaBand } from "@/components/sections/cta";
 import { Button } from "@/components/ui/button";
 import { getProject, projects } from "@/lib/site";
@@ -27,19 +29,21 @@ function ProjectPage() {
 
   return (
     <SiteShell>
-      <article className="mx-auto max-w-[1240px] px-5 pt-10 pb-16 md:px-8 md:pt-16 lg:px-12">
+      <article className="mx-auto max-w-[1240px] px-5 pt-8 pb-12 md:px-8 md:pt-12 md:pb-14 lg:px-12">
         <Link
           to="/portofoliu"
-          className="inline-flex items-center gap-2 text-sm text-muted hover:text-cream"
+          className="link-underline group inline-flex w-fit items-center gap-2 text-sm text-muted hover:text-cream"
         >
-          <ArrowLeft className="size-4" />
+          <ArrowLeft className="size-4 transition-transform duration-300 group-hover:-translate-x-0.5" />
           Portofoliu
         </Link>
-        <p className="mt-8 font-mono text-sm tracking-[0.18em] text-primary">
-          {project.year} · {project.role}
-        </p>
+        <Reveal>
+          <p className="mt-8 font-mono text-sm tracking-[0.18em] text-primary">
+            {project.year} · {project.role}
+          </p>
+        </Reveal>
         <h1 className="mt-3 font-display text-display text-cream">
-          {project.domain}
+          <AnimatedWords text={project.domain} stagger={0.05} />
         </h1>
         <p className="mt-5 max-w-2xl text-lead text-muted">{project.services}</p>
         <div className="mt-6">
@@ -63,15 +67,10 @@ function ProjectPage() {
           <div>
             <h2 className="font-display text-2xl text-cream">Descriere</h2>
             <p className="mt-4 text-muted">{project.description}</p>
-            <h2 className="mt-10 font-display text-2xl text-cream">
-              Elemente cheie
-            </h2>
+            <h2 className="mt-10 font-display text-2xl text-cream">Elemente cheie</h2>
             <ul className="mt-4 space-y-3">
               {project.highlights.map((item) => (
-                <li
-                  key={item}
-                  className="border-l-2 border-primary pl-4 text-muted"
-                >
+                <li key={item} className="border-l-2 border-primary pl-4 text-muted">
                   {item}
                 </li>
               ))}
@@ -79,9 +78,7 @@ function ProjectPage() {
           </div>
           <aside className="rounded-xl border border-border bg-surface p-6">
             <h2 className="font-display text-2xl text-cream">Rezultat final</h2>
-            <p className="mt-4 text-sm leading-relaxed text-muted">
-              {project.result}
-            </p>
+            <p className="mt-4 text-sm leading-relaxed text-muted">{project.result}</p>
           </aside>
         </div>
 
@@ -94,15 +91,17 @@ function ProjectPage() {
                   key={item.slug}
                   to="/portofoliu/$slug"
                   params={{ slug: item.slug }}
-                  className="group overflow-hidden rounded-xl border border-border"
+                  className="group overflow-hidden rounded-xl border border-border bg-surface transition-[border-color,transform,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:border-border-strong hover:shadow-[0_20px_44px_-22px_color-mix(in_oklab,var(--color-primary)_40%,transparent)]"
                 >
                   <img
                     src={item.image}
                     alt=""
-                    className="aspect-[16/9] w-full object-cover object-top transition-[transform] duration-500 group-hover:scale-[1.03]"
+                    className="aspect-[16/9] w-full object-cover object-top transition-[transform] duration-500 group-hover:scale-[1.04]"
                   />
                   <div className="p-4">
-                    <p className="font-display text-xl text-cream">{item.domain}</p>
+                    <p className="font-display text-xl text-cream transition-colors duration-300 group-hover:text-blush">
+                      {item.domain}
+                    </p>
                     <p className="mt-1 text-sm text-muted">{item.role}</p>
                   </div>
                 </Link>
