@@ -30,33 +30,44 @@ export function Work({ limit }: { limit?: number }) {
       <div className="mt-10 flex flex-col gap-8 lg:gap-14">
         {list.map((project, i) => (
           <Reveal key={project.slug} delay={i * 0.05}>
-            <Link
-              to="/portofoliu/$slug"
-              params={{ slug: project.slug }}
-              className="group grid gap-5 lg:grid-cols-[1.4fr_1fr] lg:items-center"
-            >
-              <div className="overflow-hidden rounded-xl border border-border bg-surface transition-[translate,border-color,box-shadow] duration-300 ease-out group-hover:-translate-y-1 group-hover:border-border-strong group-hover:shadow-[0_24px_50px_-24px_color-mix(in_oklab,var(--color-primary)_40%,transparent)]">
+            <div className="group grid gap-5 lg:grid-cols-[1.4fr_1fr] lg:items-center">
+              <Link
+                to="/portofoliu/$slug"
+                params={{ slug: project.slug }}
+                className="block overflow-hidden rounded-xl border border-border bg-surface transition-[translate,border-color,box-shadow] duration-300 ease-out group-hover:-translate-y-1 group-hover:border-border-strong group-hover:shadow-[0_24px_50px_-24px_color-mix(in_oklab,var(--color-primary)_40%,transparent)]"
+              >
                 <img
                   src={project.image}
                   alt={project.domain}
                   className="aspect-[16/9] w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.05]"
                 />
-              </div>
+              </Link>
               <div className="lg:pl-6">
-                <p className="font-mono text-sm tracking-[0.18em] text-primary transition-colors duration-300 group-hover:text-cream">
-                  {String(i + 1).padStart(2, "0")}
-                </p>
-                <h3 className="mt-2 font-display text-3xl text-cream transition-colors duration-300 group-hover:text-blush md:text-4xl">
-                  {project.domain}
-                </h3>
-                <p className="mt-2 text-sm text-muted">{project.role}</p>
-                <p className="mt-4 line-clamp-4 text-muted">{project.description}</p>
-                <span className="mt-5 inline-flex items-center gap-1 text-sm text-cream transition-colors duration-300 group-hover:text-primary">
+                <Link
+                  to="/portofoliu/$slug"
+                  params={{ slug: project.slug }}
+                  className="block"
+                >
+                  <p className="font-mono text-sm tracking-[0.18em] text-primary transition-colors duration-300 group-hover:text-cream">
+                    {String(i + 1).padStart(2, "0")}
+                  </p>
+                  <h3 className="mt-2 font-display text-3xl text-cream transition-colors duration-300 group-hover:text-blush md:text-4xl">
+                    {project.domain}
+                  </h3>
+                  <p className="mt-2 text-sm text-muted">{project.role}</p>
+                  <p className="mt-4 line-clamp-4 text-muted">{project.description}</p>
+                </Link>
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-5 inline-flex items-center gap-1 text-sm text-cream transition-colors duration-300 group-hover:text-primary"
+                >
                   Vezi proiectul
                   <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </span>
+                </a>
               </div>
-            </Link>
+            </div>
           </Reveal>
         ))}
       </div>
