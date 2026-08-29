@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="@Bogdan">
+  <rect width="32" height="32" rx="8" fill="#120608"/>
+  <text
+    x="16"
+    y="17"
+    text-anchor="middle"
+    dominant-baseline="central"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="22"
+    font-weight="700"
+    fill="#E11B14"
+  >@</text>
+</svg>

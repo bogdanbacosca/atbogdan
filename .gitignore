@@ -1,0 +1,16 @@
+node_modules
+.vercel
+.output
+.nitro
+.tanstack
+.wrangler
+dist
+*.log
+.env
+.env.*
+!.env.example
+screenshots
+artifacts
+.grok
+.DS_Store
+*.tsbuildinfo
