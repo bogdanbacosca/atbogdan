@@ -29,7 +29,7 @@ export function Services() {
                 <img
                   src={item.image}
                   alt=""
-                  className="h-36 w-full object-cover transition-[transform] duration-500 ease-out group-hover:scale-[1.05]"
+                  className="h-36 w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.05]"
                 />
               </div>
             </article>

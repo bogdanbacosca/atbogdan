@@ -23,13 +23,13 @@ export function About() {
               href={item.href}
               target={item.external ? "_blank" : undefined}
               rel={item.external ? "noreferrer" : undefined}
-              className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-surface transition-[border-color,transform,box-shadow] duration-300 ease-out hover:-translate-y-1.5 hover:border-border-strong hover:shadow-[0_24px_50px_-24px_color-mix(in_oklab,var(--color-primary)_45%,transparent)]"
+              className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-surface transition-[translate,border-color,box-shadow] duration-300 ease-out hover:-translate-y-1.5 hover:border-border-strong hover:shadow-[0_24px_50px_-24px_color-mix(in_oklab,var(--color-primary)_45%,transparent)]"
             >
               <div className="aspect-[16/10] overflow-hidden">
                 <img
                   src={item.image}
                   alt=""
-                  className="h-full w-full object-cover transition-[transform] duration-500 ease-out group-hover:scale-[1.04]"
+                  className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
                 />
               </div>
               <div className="flex flex-1 flex-col p-5 md:p-6">

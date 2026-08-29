@@ -91,12 +91,12 @@ function ProjectPage() {
                   key={item.slug}
                   to="/portofoliu/$slug"
                   params={{ slug: item.slug }}
-                  className="group overflow-hidden rounded-xl border border-border bg-surface transition-[border-color,transform,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:border-border-strong hover:shadow-[0_20px_44px_-22px_color-mix(in_oklab,var(--color-primary)_40%,transparent)]"
+                  className="group overflow-hidden rounded-xl border border-border bg-surface transition-[translate,border-color,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:border-border-strong hover:shadow-[0_20px_44px_-22px_color-mix(in_oklab,var(--color-primary)_40%,transparent)]"
                 >
                   <img
                     src={item.image}
                     alt=""
-                    className="aspect-[16/9] w-full object-cover object-top transition-[transform] duration-500 group-hover:scale-[1.04]"
+                    className="aspect-[16/9] w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
                   />
                   <div className="p-4">
                     <p className="font-display text-xl text-cream transition-colors duration-300 group-hover:text-blush">

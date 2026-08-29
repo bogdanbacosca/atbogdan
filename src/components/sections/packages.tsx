@@ -21,7 +21,7 @@ export function Packages() {
           <Reveal key={plan.id} delay={i * 0.08}>
             <article
               className={cn(
-                "group flex h-full flex-col rounded-xl border p-6 transition-[transform,border-color,box-shadow] duration-300 ease-out hover:-translate-y-1.5 md:p-7",
+                "group flex h-full flex-col rounded-xl border p-6 transition-[translate,border-color,box-shadow] duration-300 ease-out hover:-translate-y-1.5 md:p-7",
                 plan.featured
                   ? "border-primary bg-primary text-cream shadow-[var(--shadow-glow)] hover:shadow-[0_28px_80px_-20px_color-mix(in_oklab,var(--color-primary)_60%,transparent)]"
                   : "border-border bg-surface hover:border-border-strong hover:shadow-[0_24px_50px_-24px_color-mix(in_oklab,var(--color-primary)_35%,transparent)]",

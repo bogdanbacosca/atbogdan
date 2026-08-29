@@ -13,7 +13,7 @@ export function Hero() {
     <section className="relative overflow-hidden">
       <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_70%_20%,color-mix(in_oklab,var(--color-primary)_22%,transparent),transparent_55%)]" />
 
-      <div className="relative z-10 mx-auto grid max-w-[1240px] items-center gap-8 px-5 pt-8 pb-10 md:gap-12 md:px-8 md:pt-12 md:pb-12 lg:grid-cols-[1.15fr_0.85fr] lg:px-12 lg:pt-14 lg:pb-8">
+      <div className="relative z-10 mx-auto grid max-w-[1240px] items-center gap-8 px-5 pt-8 pb-10 md:grid-cols-[1.15fr_0.85fr] md:gap-12 md:px-8 md:pt-12 md:pb-12 lg:px-12 lg:pt-14 lg:pb-8">
         <div className="relative z-10">
           <motion.p
             className="text-xs tracking-[0.22em] text-primary uppercase"
@@ -55,12 +55,13 @@ export function Hero() {
         </div>
 
         {/* Small screens: the sphere floats behind the copy instead of pushing it
-            down. From lg up it takes its own grid column again. */}
+            down. From md up it takes its own grid column again so the whole
+            sphere stays visible on laptops (768–1023px), not just at lg. */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 top-1/2 z-0 mx-auto w-[min(118vw,600px)] -translate-y-1/2 opacity-40 lg:pointer-events-auto lg:static lg:z-auto lg:w-auto lg:translate-y-0 lg:opacity-100"
+          className="pointer-events-none absolute inset-x-0 top-1/2 z-0 mx-auto w-[min(118vw,600px)] -translate-y-1/2 opacity-40 md:pointer-events-auto md:static md:z-auto md:w-auto md:translate-y-0 md:opacity-100"
         >
-          <div className="relative mx-auto aspect-square w-full max-w-[520px] lg:max-w-none">
+          <div className="relative mx-auto aspect-square w-full max-w-[520px] md:max-w-none">
             <div className="absolute inset-[12%] rounded-full bg-primary/20 blur-3xl" />
             <ParticleSphere className="relative z-10" />
           </div>

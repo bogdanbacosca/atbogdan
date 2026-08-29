@@ -10,12 +10,14 @@ export function Work({ limit }: { limit?: number }) {
   return (
     <section className="mx-auto max-w-[1240px] px-5 py-10 md:px-8 md:py-14 lg:px-12">
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-        <Reveal>
-          <p className="text-xs tracking-[0.22em] text-primary uppercase">Portofoliu</p>
-        </Reveal>
-        <h2 className="mt-3 font-display text-title text-cream">
-          <AnimatedWords text="Proiecte selectate" stagger={0.055} />
-        </h2>
+        <div>
+          <Reveal>
+            <p className="text-xs tracking-[0.22em] text-primary uppercase">Portofoliu</p>
+          </Reveal>
+          <h2 className="mt-3 font-display text-title text-cream">
+            <AnimatedWords text="Proiecte selectate" stagger={0.055} />
+          </h2>
+        </div>
         {limit ? (
           <Reveal delay={0.08}>
             <Button asChild variant="outline">
@@ -33,11 +35,11 @@ export function Work({ limit }: { limit?: number }) {
               params={{ slug: project.slug }}
               className="group grid gap-5 lg:grid-cols-[1.4fr_1fr] lg:items-center"
             >
-              <div className="overflow-hidden rounded-xl border border-border bg-surface transition-[border-color,transform,box-shadow] duration-300 ease-out group-hover:-translate-y-1 group-hover:border-border-strong group-hover:shadow-[0_24px_50px_-24px_color-mix(in_oklab,var(--color-primary)_40%,transparent)]">
+              <div className="overflow-hidden rounded-xl border border-border bg-surface transition-[translate,border-color,box-shadow] duration-300 ease-out group-hover:-translate-y-1 group-hover:border-border-strong group-hover:shadow-[0_24px_50px_-24px_color-mix(in_oklab,var(--color-primary)_40%,transparent)]">
                 <img
                   src={project.image}
                   alt={project.domain}
-                  className="aspect-[16/9] w-full object-cover object-top transition-[transform] duration-500 ease-out group-hover:scale-[1.05]"
+                  className="aspect-[16/9] w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.05]"
                 />
               </div>
               <div className="lg:pl-6">
