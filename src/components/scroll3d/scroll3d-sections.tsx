@@ -92,9 +92,9 @@ function HeroChapter() {
 
           <FadeUp delay={0.55} className="self-start">
             {/* Top-aligned with the text column, so it sits right next to the
-                top of the left container. Centered on mobile, pushed to the
-                right edge from md up — visible on every breakpoint now. */}
-            <div className="float-slow relative w-fit justify-self-center md:justify-self-end">
+                top of the left container. Left-aligned on mobile, pushed to
+                the right edge from md up — visible on every breakpoint now. */}
+            <div className="float-slow relative w-fit justify-self-start md:justify-self-end">
               <div className="scroll-panel !p-2.5">
                 <img
                   src="/brand/profile.jpg"

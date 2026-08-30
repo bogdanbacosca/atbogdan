@@ -271,9 +271,9 @@ export function EditorWindow({ sp }: { sp: MotionValue<number> }) {
 
 export function GitWindow({ sp }: { sp: MotionValue<number> }) {
   const commits = [
-    { from: 0.715, to: 0.735, dot: "bg-primary", hash: "9f3ab2a", feat: "feat: site cristinahorga.ro", year: "2025", cls: "text-cream/95" },
-    { from: 0.735, to: 0.755, dot: "bg-blush/80", hash: "1c8e7d0", feat: "feat: blog vacantesmart.eu", year: "2025", cls: "text-cream/80" },
-    { from: 0.755, to: 0.775, dot: "bg-cream/60", hash: "b2a5f19", feat: "fix: reparatiimasinispalat.eu", year: "2025", cls: "text-cream/70" },
+    { from: 0.692, to: 0.708, dot: "bg-primary", hash: "9f3ab2a", feat: "feat: site cristinahorga.ro", year: "2025", cls: "text-cream/95" },
+    { from: 0.708, to: 0.724, dot: "bg-blush/80", hash: "1c8e7d0", feat: "feat: blog vacantesmart.eu", year: "2025", cls: "text-cream/80" },
+    { from: 0.724, to: 0.74, dot: "bg-cream/60", hash: "b2a5f19", feat: "fix: reparatiimasinispalat.eu", year: "2025", cls: "text-cream/70" },
   ];
   return (
     <div className="float-slow w-[min(92vw,460px)]">
@@ -289,14 +289,14 @@ export function GitWindow({ sp }: { sp: MotionValue<number> }) {
               </span>
             </RevealLine>
           ))}
-          <RevealLine sp={sp} from={0.775} to={0.795} className="relative pl-6">
+          <RevealLine sp={sp} from={0.74} to={0.756} className="relative pl-6">
             <span
               aria-hidden="true"
               className="absolute top-1/2 left-0 size-2.5 -translate-y-1/2 rounded-full bg-primary blur-[1px]"
             />
             <span className="text-muted">HEAD → main · working tree curat</span>
           </RevealLine>
-          <RevealLine sp={sp} from={0.795} to={0.82} className="relative pl-6 pt-1">
+          <RevealLine sp={sp} from={0.756} to={0.776} className="relative pl-6 pt-1">
             <span className="inline-flex items-center gap-2 text-muted">
               <GitBranch className="size-3.5 text-primary" /> 3 commit-uri · 3 proiecte · 3 lansări
             </span>
@@ -315,19 +315,19 @@ export function DeployWindow({ sp }: { sp: MotionValue<number> }) {
   return (
     <div className="float-slow w-[min(92vw,440px)]">
       <WindowShell title="deploy.sh — atelier">
-        <RevealLine sp={sp} from={0.895} to={0.912}>
+        <RevealLine sp={sp} from={0.86} to={0.877}>
           <span className="text-primary">$</span> <span className="text-cream/90">npm run build</span>
         </RevealLine>
-        <RevealLine sp={sp} from={0.912} to={0.93} className="text-muted">
+        <RevealLine sp={sp} from={0.877} to={0.894} className="text-muted">
           ✔ build reușit · 312 kB (gzip) · vite 8
         </RevealLine>
-        <RevealLine sp={sp} from={0.93} to={0.948}>
+        <RevealLine sp={sp} from={0.894} to={0.911}>
           <span className="text-primary">$</span> <span className="text-cream/90">npm run deploy -- --prod</span>
         </RevealLine>
-        <RevealLine sp={sp} from={0.948} to={0.968} className="text-muted">
+        <RevealLine sp={sp} from={0.911} to={0.929} className="text-muted">
           ✔ deployment finalizat
         </RevealLine>
-        <RevealLine sp={sp} from={0.968} to={0.988}>
+        <RevealLine sp={sp} from={0.929} to={0.947}>
           <span className="inline-flex items-center gap-2 pt-1 text-blush">
             <Rocket className="size-4 text-primary" />
             site-ul tău, live. → contactează-mă

@@ -98,12 +98,12 @@ function LiveScene() {
   const eZ = useTransform(sp, [0.46, 0.7], [-60, 80]);
   const eY = useTransform(sp, [0.46, 0.7], [18, -18]);
 
-  const gOp = useTransform(sp, [0.7, 0.75, 0.85, 0.9], [0, 1, 1, 0]);
-  const gRot = useTransform(sp, [0.72, 0.88], [-12, 12]);
-  const gZ = useTransform(sp, [0.7, 0.88], [-90, 40]);
+  const gOp = useTransform(sp, [0.65, 0.7, 0.83, 0.88], [0, 1, 1, 0]);
+  const gRot = useTransform(sp, [0.67, 0.86], [-12, 12]);
+  const gZ = useTransform(sp, [0.65, 0.86], [-90, 40]);
 
-  const dOp = useTransform(sp, [0.88, 0.93, 0.995, 1], [0, 1, 1, 0]);
-  const dZ = useTransform(sp, [0.88, 1], [110, 0]);
+  const dOp = useTransform(sp, [0.83, 0.88, 0.99, 1], [0, 1, 1, 0]);
+  const dZ = useTransform(sp, [0.83, 0.96], [110, 0]);
 
   return (
     <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
