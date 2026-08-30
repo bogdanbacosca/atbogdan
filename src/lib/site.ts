@@ -13,7 +13,6 @@ export const site = {
   location: "Roman, România",
   github: "https://github.com/bogdanbacosca",
   logo: "/brand/logo.png",
-  logoMark: "/brand/logo-mark.png",
 } as const;
 
 export const nav = [
@@ -29,24 +28,6 @@ export const hero = {
   cta: "Contactează-mă",
   secondary: "Vezi portofoliul",
 };
-
-export const stats = [
-  {
-    value: "10+",
-    label: "ani experiență",
-    detail: "Pasiune și expertiză în programare, web design și graphic design",
-  },
-  {
-    value: "Meta",
-    label: "Front-End Developer",
-    detail: "Programator certificat",
-  },
-  {
-    value: "OSS",
-    label: "Open-Source",
-    detail: "Contribuitor și menținător",
-  },
-] as const;
 
 export const about = {
   eyebrow: "Despre mine",
@@ -92,19 +73,16 @@ export const services = [
     index: "01",
     title: "Creare site-uri web",
     body: "Ofer servicii complete de creare site-uri web, adaptate nevoilor tale. Fie că ai nevoie de un site de prezentare sau un magazin online, mă asigur că design-ul este creativ și funcțional, pe desktop cât și pe mobil.",
-    image: "/brand/profile.jpg",
   },
   {
     index: "02",
     title: "Programare și elemente custom",
     body: "Transform ideile în funcționalități reale — dezvoltare web modernă, cod curat și soluții personalizate pentru fiecare proiect. Creez elemente custom care dau unicitate și performanță site‑ului tău.",
-    image: "/brand/code-hands.jpg",
   },
   {
     index: "03",
     title: "Design grafic",
     body: "Ofer servicii de design grafic pentru a crea identități vizuale memorabile. De la logo-uri la materiale publicitare, îți transform ideile în realitate vizuală, atrăgătoare și creativă.",
-    image: "/brand/brand-identity.jpg",
   },
 ] as const;
 
@@ -203,48 +181,6 @@ export const projects: Project[] = [
       "Un site funcțional și eficient, care transmite profesionalism și încredere. ReparatiiMasiniSpalat.eu este un exemplu de proiect în care utilitatea și simplitatea se îmbină cu un design curat, orientat spre conversie.",
   },
 ];
-
-export function getProject(slug: string) {
-  return projects.find((p) => p.slug === slug);
-}
-
-export const packages = [
-  {
-    id: "simplu",
-    name: "Simplu",
-    subtitle: "Plan simplu",
-    featured: false,
-    features: [
-      "Pagină prezentare",
-      "Pagină despre mine",
-      "Pagină contact",
-      "Suport 24/7",
-    ],
-  },
-  {
-    id: "pro",
-    name: "Plan PRO",
-    subtitle: "Servicii complete",
-    featured: true,
-    features: [
-      "Plan simplu",
-      "Plan avansat",
-      "Design logo",
-      "Grafică personalizată",
-    ],
-  },
-  {
-    id: "avansat",
-    name: "Avansat",
-    subtitle: "Plan avansat",
-    featured: false,
-    features: [
-      "Plan simplu",
-      "Funcții personalizate",
-      "Optimizare SEO",
-    ],
-  },
-] as const;
 
 export const cta = {
   title: "Îți dorești un site?",

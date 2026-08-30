@@ -248,9 +248,10 @@ function PortfolioChapter() {
           <ul className="mt-6 space-y-3">
             {projects.map((project, i) => (
               <FadeUp key={project.slug} delay={0.12 + i * 0.08} as="li">
-                <Link
-                  to="/portofoliu/$slug"
-                  params={{ slug: project.slug }}
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noreferrer"
                   className="group flex items-center justify-between gap-4 rounded-xl border border-border bg-bg-elevated px-4 py-3 transition-colors hover:border-primary/60"
                 >
                   <img
@@ -263,8 +264,8 @@ function PortfolioChapter() {
                   <span className="flex-1 text-sm font-medium text-cream group-hover:text-blush md:text-base">
                     {project.domain}
                   </span>
-                  <ArrowRight className="size-4 shrink-0 text-primary transition-transform group-hover:translate-x-1" />
-                </Link>
+                  <ArrowUpRight className="size-4 shrink-0 text-primary transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </a>
               </FadeUp>
             ))}
           </ul>

@@ -11,9 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ContactRouteImport } from './routes/contact'
-import { Route as PortofoliuRouteImport } from './routes/portofoliu'
 import { Route as PortofoliuIndexRouteImport } from './routes/portofoliu.index'
-import { Route as PortofoliuSlugRouteImport } from './routes/portofoliu.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -25,62 +23,39 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PortofoliuRoute = PortofoliuRouteImport.update({
-  id: '/portofoliu',
-  path: '/portofoliu',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const PortofoliuIndexRoute = PortofoliuIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => PortofoliuRoute,
-} as any)
-const PortofoliuSlugRoute = PortofoliuSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
   getParentRoute: () => PortofoliuRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
-  '/portofoliu': typeof PortofoliuRouteWithChildren
-  '/portofoliu/$slug': typeof PortofoliuSlugRoute
   '/portofoliu/': typeof PortofoliuIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
-  '/portofoliu/$slug': typeof PortofoliuSlugRoute
   '/portofoliu': typeof PortofoliuIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
-  '/portofoliu': typeof PortofoliuRouteWithChildren
-  '/portofoliu/$slug': typeof PortofoliuSlugRoute
   '/portofoliu/': typeof PortofoliuIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    '/' | '/contact' | '/portofoliu' | '/portofoliu/$slug' | '/portofoliu/'
+  fullPaths: '/' | '/contact' | '/portofoliu/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contact' | '/portofoliu/$slug' | '/portofoliu'
-  id:
-    | '__root__'
-    | '/'
-    | '/contact'
-    | '/portofoliu'
-    | '/portofoliu/$slug'
-    | '/portofoliu/'
+  to: '/' | '/contact' | '/portofoliu'
+  id: '__root__' | '/' | '/contact' | '/portofoliu/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContactRoute: typeof ContactRoute
-  PortofoliuRoute: typeof PortofoliuRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -99,13 +74,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/portofoliu': {
-      id: '/portofoliu'
-      path: '/portofoliu'
-      fullPath: '/portofoliu'
-      preLoaderRoute: typeof PortofoliuRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/portofoliu/': {
       id: '/portofoliu/'
       path: '/'
@@ -113,34 +81,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortofoliuIndexRouteImport
       parentRoute: typeof PortofoliuRoute
     }
-    '/portofoliu/$slug': {
-      id: '/portofoliu/$slug'
-      path: '/$slug'
-      fullPath: '/portofoliu/$slug'
-      preLoaderRoute: typeof PortofoliuSlugRouteImport
-      parentRoute: typeof PortofoliuRoute
-    }
   }
 }
-
-interface PortofoliuRouteChildren {
-  PortofoliuSlugRoute: typeof PortofoliuSlugRoute
-  PortofoliuIndexRoute: typeof PortofoliuIndexRoute
-}
-
-const PortofoliuRouteChildren: PortofoliuRouteChildren = {
-  PortofoliuSlugRoute: PortofoliuSlugRoute,
-  PortofoliuIndexRoute: PortofoliuIndexRoute,
-}
-
-const PortofoliuRouteWithChildren = PortofoliuRoute._addFileChildren(
-  PortofoliuRouteChildren,
-)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactRoute: ContactRoute,
-  PortofoliuRoute: PortofoliuRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -46,9 +46,10 @@ export function Work({ limit }: { limit?: number }) {
                 />
               </a>
               <div className="lg:pl-6">
-                <Link
-                  to="/portofoliu/$slug"
-                  params={{ slug: project.slug }}
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noreferrer"
                   className="block"
                 >
                   <p className="font-mono text-sm tracking-[0.18em] text-primary transition-colors duration-300 group-hover:text-cream">
@@ -75,7 +76,7 @@ export function Work({ limit }: { limit?: number }) {
                   <p className="mt-4 line-clamp-4 text-muted">
                     <AnimatedText text={project.description} delay={0.24 + i * 0.12} stagger={0.008} />
                   </p>
-                </Link>
+                </a>
                 <FadeUp as="span" delay={0.32 + i * 0.12} className="mt-5 inline-flex">
                   <a
                     href={project.url}
