@@ -3,7 +3,6 @@ import { useHydrationSafeReduce } from "@/components/motion/use-hydration-safe-r
 import {
   DeployWindow,
   EditorWindow,
-  GhostWindows,
   GitWindow,
   StackRing,
   TerminalWindow,
@@ -195,8 +194,6 @@ function LiveScene() {
           >
             <DeployWindow sp={sp} />
           </motion.div>
-
-          <GhostWindows />
         </motion.div>
       </div>
     </div>
