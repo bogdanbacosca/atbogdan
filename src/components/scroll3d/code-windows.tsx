@@ -384,11 +384,6 @@ function GhostWindow({
 export function GhostWindows() {
   return (
     <>
-      <div className="absolute left-[12%] top-[30%] w-52 -rotate-6">
-        <GhostWindow title="styles.css">
-          <p>:root &#123; accent: crimson &#125;</p>
-        </GhostWindow>
-      </div>
       <div className="absolute right-[10%] top-[26%] w-48 rotate-3">
         <GhostWindow title="package.json">
           <p>&quot;motion&quot;: &quot;^13&quot;</p>

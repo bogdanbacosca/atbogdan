@@ -3,6 +3,7 @@ import { ArrowDownRight, ArrowRight, ArrowUpRight, ChevronDown, Mail, Phone } fr
 import type { ReactNode } from "react";
 import { AnimatedChars, AnimatedText, AnimatedWords } from "@/components/motion/animated-text";
 import { FadeUp } from "@/components/motion/fade-up";
+import { Magnetic } from "@/components/motion/magnetic";
 import { Button } from "@/components/ui/button";
 import { CustomCodeGlyph, PenToolGlyph, PulseIcon, ResponsiveGlyph } from "@/components/scroll3d/animated-svg";
 import { SkillsMarquee } from "@/components/sections/skills-marquee";
@@ -69,12 +70,14 @@ function HeroChapter() {
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <FadeUp delay={0.7} className="w-fit">
-              <Button asChild size="lg">
-                <Link to="/contact">
-                  {hero.cta}
-                  <ArrowRight className="size-4" />
-                </Link>
-              </Button>
+              <Magnetic>
+                <Button asChild size="lg">
+                  <Link to="/contact">
+                    {hero.cta}
+                    <ArrowRight className="size-4" />
+                  </Link>
+                </Button>
+              </Magnetic>
             </FadeUp>
             <FadeUp delay={0.82} className="w-fit">
               <Button asChild variant="outline" size="lg">
@@ -293,12 +296,14 @@ function ContactChapter() {
           <h2 className="mt-3 font-display text-title text-cream">{cta.title}</h2>
           <p className="mt-3 text-lead text-muted">{cta.body}</p>
           <FadeUp delay={0.25} className="mt-7 flex justify-center">
-            <Button asChild size="lg">
-              <Link to="/contact">
-                {cta.button}
-                <ArrowRight className="size-4" />
-              </Link>
-            </Button>
+            <Magnetic>
+              <Button asChild size="lg">
+                <Link to="/contact">
+                  {cta.button}
+                  <ArrowRight className="size-4" />
+                </Link>
+              </Button>
+            </Magnetic>
           </FadeUp>
           <FadeUp delay={0.4} className="mt-7">
             <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-mono text-xs text-muted">

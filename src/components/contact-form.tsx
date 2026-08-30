@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
+import { Magnetic } from "@/components/motion/magnetic";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -97,9 +98,11 @@ export function ContactForm() {
         ) : null}
       </FadeUp>
       <FadeUp delay={0.34} className="w-full md:w-fit">
-        <Button type="submit" size="lg" className="w-full md:w-auto" disabled={isLoading}>
-          {isLoading ? "Se trimite…" : contactCopy.submit}
-        </Button>
+        <Magnetic>
+          <Button type="submit" size="lg" className="w-full md:w-auto" disabled={isLoading}>
+            {isLoading ? "Se trimite…" : contactCopy.submit}
+          </Button>
+        </Magnetic>
       </FadeUp>
       {formStatus === "success" ? (
         <p role="status" data-testid="form-status" className="text-sm text-emerald-400">
