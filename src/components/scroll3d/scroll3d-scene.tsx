@@ -81,11 +81,14 @@ function LiveScene() {
   const floorZ = useTransform(sp, [0, 1], ["-680px", "150px"]);
   const wallZ = useTransform(sp, [0, 1], [-90, 60]);
 
-  /* Chapter visibility + hero-object travel. */
-  const tOp = useTransform(sp, [0.0, 0.05, 0.2, 0.25], [0, 1, 1, 0]);
-  const tRot = useTransform(sp, [0, 0.1, 0.22], [14, 4, -10]);
-  const tZ = useTransform(sp, [0, 0.22], [60, -70]);
-  const tY = useTransform(sp, [0, 0.22], [-16, 20]);
+  /* Chapter visibility + hero-object travel.
+     The terminal ("bash — atelier@bogdan") leaves the stage early — fully
+     gone by ~0.15 progress, before the skills marquee band scrolls through,
+     so the two never overlap on screen. */
+  const tOp = useTransform(sp, [0.0, 0.05, 0.1, 0.15], [0, 1, 1, 0]);
+  const tRot = useTransform(sp, [0, 0.08, 0.15], [14, 5, -8]);
+  const tZ = useTransform(sp, [0, 0.15], [60, -70]);
+  const tY = useTransform(sp, [0, 0.15], [-16, 20]);
 
   const sOp = useTransform(sp, [0.2, 0.26, 0.43, 0.49], [0, 1, 1, 0]);
   const sZ = useTransform(sp, [0.2, 0.46], [-80, 60]);

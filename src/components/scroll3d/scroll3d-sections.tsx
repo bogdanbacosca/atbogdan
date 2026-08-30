@@ -4,13 +4,7 @@ import type { ReactNode } from "react";
 import { AnimatedChars, AnimatedText, AnimatedWords } from "@/components/motion/animated-text";
 import { FadeUp } from "@/components/motion/fade-up";
 import { Button } from "@/components/ui/button";
-import {
-  BrowserGlyph,
-  DevGlyph,
-  PaletteGlyph,
-  PulseIcon,
-  TerminalGlyph,
-} from "@/components/scroll3d/animated-svg";
+import { PulseIcon } from "@/components/scroll3d/animated-svg";
 import { SkillsMarquee } from "@/components/sections/skills-marquee";
 import { about, cta, differentiators, hero, projects, services, site, skills } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -57,25 +51,6 @@ function Panel({ children, className }: { children: ReactNode; className?: strin
   return <div className={cn("scroll-panel p-6 sm:p-8 lg:p-10", className)}>{children}</div>;
 }
 
-/* A glass card holding one animated service glyph, centered in its column. */
-function SvgCard({
-  children,
-  className,
-  delay,
-}: {
-  children: ReactNode;
-  className?: string;
-  delay?: number;
-}) {
-  return (
-    <FadeUp delay={delay} className={className}>
-      <div className="scroll-panel flex size-40 items-center justify-center text-primary lg:size-44">
-        {children}
-      </div>
-    </FadeUp>
-  );
-}
-
 /* ------------------------------------------------------------------ */
 /* Ch. 1 — Terminal / hero                                             */
 /* ------------------------------------------------------------------ */
@@ -112,23 +87,18 @@ function HeroChapter() {
           </div>
         </div>
 
-          <FadeUp delay={0.55} className="hidden md:block">
-            {/* Lifted a touch higher than dead-center so the profile card
-                reads as a hero anchor; wrapper holds the offset so it
-                composes with the floaty transform animation inside. */}
-            <div className="md:-translate-y-14 lg:-translate-y-20">
-              <div className="float-slow relative w-fit justify-self-end">
-                <div className="scroll-panel !p-2.5">
-                  <img
-                    src="/brand/profile.jpg"
-                    alt="Poză de profil — Bogdan"
-                    className="aspect-[4/3] w-full max-w-[460px] rounded-xl object-cover"
-                    loading="eager"
-                  />
-                </div>
-                <div className="absolute -bottom-5 -left-5 flex size-14 items-center justify-center rounded-2xl border border-border bg-bg-elevated text-primary">
-                  <DevGlyph className="size-8" />
-                </div>
+          <FadeUp delay={0.55} className="self-start">
+            {/* Top-aligned with the text column, so it sits right next to the
+                top of the left container. Centered on mobile, pushed to the
+                right edge from md up — visible on every breakpoint now. */}
+            <div className="float-slow relative w-fit justify-self-center md:justify-self-end">
+              <div className="scroll-panel !p-2.5">
+                <img
+                  src="/brand/profile.jpg"
+                  alt="Poză de profil — Bogdan"
+                  className="aspect-[4/3] w-full max-w-[320px] rounded-xl object-cover sm:max-w-[400px] md:max-w-[460px]"
+                  loading="eager"
+                />
               </div>
             </div>
           </FadeUp>
@@ -218,22 +188,8 @@ function StackChapter() {
 
 function ServicesChapter() {
   return (
-    <Chapter id="servicii" gridClassName="md:grid md:grid-cols-[1.05fr_0.95fr] lg:pr-24">
-      <div
-        className="relative hidden flex-col items-center justify-center gap-7 md:flex"
-        aria-hidden="true"
-      >
-        <SvgCard delay={0.2} className="float-slow -rotate-3">
-          <BrowserGlyph className="size-24 lg:size-28" />
-        </SvgCard>
-        <SvgCard delay={0.3} className="float-slower rotate-2">
-          <TerminalGlyph className="size-24 lg:size-28" />
-        </SvgCard>
-        <SvgCard delay={0.4} className="float-slow -rotate-2">
-          <PaletteGlyph className="size-24 lg:size-28" />
-        </SvgCard>
-      </div>
-      <div className="max-w-xl md:col-start-2 lg:mr-12">
+    <Chapter id="servicii">
+      <div className="mx-auto max-w-xl">
         <Panel>
           <Kicker>// services.ts — ce construiesc</Kicker>
           <h2 className="mt-3 font-display text-title text-cream">De la idee la site live</h2>
