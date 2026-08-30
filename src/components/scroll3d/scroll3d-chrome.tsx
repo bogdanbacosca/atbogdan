@@ -1,4 +1,4 @@
-import { motion, useMotionValueEvent, useScroll, useSpring } from "motion/react";
+import { motion, useMotionValueEvent, useScroll, useSpring, useTransform } from "motion/react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -22,6 +22,9 @@ export function Scroll3dChrome() {
   const { scrollYProgress } = useScroll();
   const sp = useSpring(scrollYProgress, { stiffness: 90, damping: 26, mass: 0.6 });
   const [active, setActive] = useState(0);
+
+  /* The chapter counter fades away before the footer text arrives. */
+  const counterFade = useTransform(sp, [0.93, 0.985], [1, 0]);
 
   useMotionValueEvent(sp, "change", (v) => {
     const idx = EDGES.findIndex((edge) => v < edge);
@@ -79,12 +82,15 @@ export function Scroll3dChrome() {
         })}
       </nav>
 
-      {/* live chapter counter (all screens) */}
-      <div className="pointer-events-none fixed bottom-5 left-5 z-30 font-mono text-xs tracking-[0.18em] text-muted uppercase md:bottom-6 md:left-8 lg:left-12">
+      {/* live chapter counter — fades out as the footer scrolls into view */}
+      <motion.div
+        style={{ opacity: counterFade }}
+        className="pointer-events-none fixed bottom-5 left-5 z-30 font-mono text-xs tracking-[0.18em] text-muted uppercase md:bottom-6 md:left-8 lg:left-12"
+      >
         <span className="text-primary">ch.0{active + 1}</span>
         <span className="text-border-strong"> / 05</span>
         <span className="ml-3 hidden sm:inline">— {CHAPTERS[active].label}</span>
-      </div>
+      </motion.div>
     </>
   );
 }

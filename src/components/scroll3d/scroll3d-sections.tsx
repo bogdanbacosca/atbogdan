@@ -1,11 +1,17 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowDownRight, ArrowRight, ChevronDown, Mail, Phone } from "lucide-react";
+import { ArrowDownRight, ArrowRight, ArrowUpRight, ChevronDown, Mail, Phone } from "lucide-react";
 import type { ReactNode } from "react";
 import { AnimatedChars, AnimatedText, AnimatedWords } from "@/components/motion/animated-text";
 import { FadeUp } from "@/components/motion/fade-up";
 import { Button } from "@/components/ui/button";
-import { DevGlyph, PulseIcon } from "@/components/scroll3d/animated-svg";
-import { about, cta, hero, projects, services, site, skills } from "@/lib/site";
+import {
+  BrowserGlyph,
+  DevGlyph,
+  PaletteGlyph,
+  PulseIcon,
+  TerminalGlyph,
+} from "@/components/scroll3d/animated-svg";
+import { about, cta, differentiators, hero, projects, services, site, skills } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 /* ------------------------------------------------------------------ */
@@ -48,6 +54,25 @@ function Kicker({ children }: { children: ReactNode }) {
 
 function Panel({ children, className }: { children: ReactNode; className?: string }) {
   return <div className={cn("scroll-panel p-6 sm:p-8 lg:p-10", className)}>{children}</div>;
+}
+
+/* A glass card holding one animated service glyph, centered in its column. */
+function SvgCard({
+  children,
+  className,
+  delay,
+}: {
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+}) {
+  return (
+    <FadeUp delay={delay} className={className}>
+      <div className="scroll-panel flex size-40 items-center justify-center text-primary lg:size-44">
+        {children}
+      </div>
+    </FadeUp>
+  );
 }
 
 /* ------------------------------------------------------------------ */
@@ -140,23 +165,42 @@ function StackChapter() {
           </div>
         </Panel>
       </div>
-      <FadeUp delay={0.35} className="hidden md:block">
-        <a
-          href="/brand/cert-meta.jpg"
-          target="_blank"
-          rel="noreferrer"
-          className="float-slower group relative block w-fit justify-self-end lg:mr-12"
-        >
-          <img
-            src="/brand/cert-meta.jpg"
-            alt="Certificatul Meta Front-End Developer Professional"
-            className="w-64 rotate-3 rounded-xl border border-border object-cover shadow-[0_18px_50px_color-mix(in_oklab,var(--color-bg)_85%,transparent)] transition-transform duration-300 group-hover:rotate-1 lg:w-72"
-            loading="lazy"
-          />
-          <span className="absolute inset-x-4 bottom-3 rounded-lg border border-border bg-bg-elevated px-3 py-1.5 text-center font-mono text-[11px] tracking-[0.14em] text-muted uppercase">
-            Meta Front-End Developer
-          </span>
-        </a>
+      <FadeUp
+        delay={0.35}
+        className="mt-12 flex flex-col items-center justify-center gap-7 md:mt-0 md:gap-9"
+      >
+        {differentiators.slice(0, 2).map((item, i) => (
+          <a
+            key={item.id}
+            href={item.href}
+            target="_blank"
+            rel="noreferrer"
+            className={cn(
+              "group w-full max-w-[340px] lg:max-w-[380px]",
+              i === 0 ? "float-slower" : "float-slow",
+            )}
+          >
+            <div className="scroll-panel overflow-hidden !p-3 transition-transform duration-300 group-hover:-translate-y-1">
+              <img
+                src={item.image}
+                alt={item.title}
+                className="aspect-[16/10] w-full rounded-lg object-cover"
+                loading="lazy"
+              />
+              <div className="px-2 pb-1 pt-3.5 text-center">
+                <p className="font-mono text-[11px] tracking-[0.16em] text-primary uppercase">
+                  {item.eyebrow}
+                </p>
+                <h3 className="mt-1 font-display text-lg text-cream md:text-xl">{item.title}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-muted">{item.body}</p>
+                <span className="mt-2.5 inline-flex items-center gap-1.5 font-mono text-xs tracking-[0.1em] text-cream uppercase transition-colors group-hover:text-primary">
+                  {item.cta}
+                  <ArrowUpRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </span>
+              </div>
+            </div>
+          </a>
+        ))}
       </FadeUp>
     </Chapter>
   );
@@ -169,31 +213,19 @@ function StackChapter() {
 function ServicesChapter() {
   return (
     <Chapter id="servicii" gridClassName="md:grid md:grid-cols-[1.05fr_0.95fr] lg:pr-24">
-      <div className="relative hidden md:block" aria-hidden="true">
-        <FadeUp delay={0.2} className="float-slow relative ml-auto w-fit">
-          <img
-            src={services[0].image}
-            alt=""
-            className="w-56 -rotate-3 rounded-xl border border-border object-cover shadow-[0_18px_50px_color-mix(in_oklab,var(--color-bg)_85%,transparent)]"
-            loading="lazy"
-          />
-        </FadeUp>
-        <FadeUp delay={0.3} className="float-slower relative -mt-10 ml-8 w-fit">
-          <img
-            src={services[1].image}
-            alt=""
-            className="w-52 rotate-2 rounded-xl border border-border object-cover shadow-[0_18px_50px_color-mix(in_oklab,var(--color-bg)_85%,transparent)]"
-            loading="lazy"
-          />
-        </FadeUp>
-        <FadeUp delay={0.4} className="float-slow relative -mt-8 ml-auto mr-4 w-fit">
-          <img
-            src={services[2].image}
-            alt=""
-            className="w-48 -rotate-2 rounded-xl border border-border object-cover shadow-[0_18px_50px_color-mix(in_oklab,var(--color-bg)_85%,transparent)]"
-            loading="lazy"
-          />
-        </FadeUp>
+      <div
+        className="relative hidden flex-col items-center justify-center gap-7 md:flex"
+        aria-hidden="true"
+      >
+        <SvgCard delay={0.2} className="float-slow -rotate-3">
+          <BrowserGlyph className="size-24 lg:size-28" />
+        </SvgCard>
+        <SvgCard delay={0.3} className="float-slower rotate-2">
+          <TerminalGlyph className="size-24 lg:size-28" />
+        </SvgCard>
+        <SvgCard delay={0.4} className="float-slow -rotate-2">
+          <PaletteGlyph className="size-24 lg:size-28" />
+        </SvgCard>
       </div>
       <div className="max-w-xl md:col-start-2 lg:mr-12">
         <Panel>
