@@ -1,5 +1,5 @@
 import { motion, useTransform, type MotionValue } from "motion/react";
-import { BadgeCheck, GitBranch, Rocket } from "lucide-react";
+import { GitBranch, Rocket } from "lucide-react";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
@@ -144,8 +144,6 @@ function StackCard({
 
 export function StackRing({ sp }: { sp: MotionValue<number> }) {
   const spin = useTransform(sp, [0.215, 0.445], [60, -160]);
-  const certOpacity = useTransform(sp, [0.24, 0.3, 0.4, 0.47], [0, 1, 1, 0]);
-  const certY = useTransform(sp, [0.24, 0.47], [26, -34]);
   return (
     <div className="relative">
       <motion.div
@@ -161,16 +159,6 @@ export function StackRing({ sp }: { sp: MotionValue<number> }) {
         {STACK.map((item, i) => (
           <StackCard key={item.label} label={item.label} tint={item.tint} index={i} total={STACK.length} />
         ))}
-      </motion.div>
-
-      <motion.div
-        className="absolute left-[calc(50%_+_30px)] top-[calc(50%_+_120px)] md:left-[calc(50%_+_150px)] md:top-[calc(50%_-_60px)]"
-        style={{ opacity: certOpacity, y: certY }}
-      >
-        <div className="float-slower flex items-center gap-2 rounded-full border border-border-strong bg-bg-elevated/95 px-4 py-2 font-mono text-xs text-cream shadow-[0_18px_44px_-18px_rgba(0,0,0,0.85)]">
-          <BadgeCheck className="size-4 text-primary" />
-          Meta Front-End Professional
-        </div>
       </motion.div>
     </div>
   );
