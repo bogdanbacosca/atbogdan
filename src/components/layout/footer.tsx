@@ -60,11 +60,9 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-border">
-        <FadeUp delay={0.55}>
-          <p className="mx-auto max-w-[1240px] px-5 py-5 text-xs text-muted md:px-8 lg:px-12">
-            Drepturi de autor © {new Date().getFullYear()} Bogdan Bacoșcă
-          </p>
-        </FadeUp>
+        <p className="mx-auto max-w-[1240px] px-5 py-5 text-xs text-muted md:px-8 lg:px-12">
+          Drepturi de autor © {new Date().getFullYear()} Bogdan Bacoșcă
+        </p>
       </div>
     </footer>
   );

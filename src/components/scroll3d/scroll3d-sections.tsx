@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import { AnimatedChars, AnimatedText, AnimatedWords } from "@/components/motion/animated-text";
 import { FadeUp } from "@/components/motion/fade-up";
 import { Button } from "@/components/ui/button";
-import { PulseIcon } from "@/components/scroll3d/animated-svg";
+import { CustomCodeGlyph, PenToolGlyph, PulseIcon, ResponsiveGlyph } from "@/components/scroll3d/animated-svg";
 import { SkillsMarquee } from "@/components/sections/skills-marquee";
 import { about, cta, differentiators, hero, projects, services, site, skills } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -186,25 +186,44 @@ function StackChapter() {
 /* Ch. 3 — Editor / servicii                                           */
 /* ------------------------------------------------------------------ */
 
+/* One small animated glyph per service, matched by the service index
+   in site.ts (01 = creare site-uri web, 02 = programare, 03 = design grafic). */
+const SERVICE_GLYPHS: Record<(typeof services)[number]["index"], typeof ResponsiveGlyph> = {
+  "01": ResponsiveGlyph,
+  "02": CustomCodeGlyph,
+  "03": PenToolGlyph,
+};
+
 function ServicesChapter() {
   return (
-    <Chapter id="servicii">
-      <div className="mx-auto max-w-xl">
+    <Chapter id="servicii" gridClassName="lg:pr-24">
+      {/* Casetă aliniată la dreapta: fereastra de editor care se animă în
+          stânga scenei rămâne vizibilă, iar mr-ul ține distanța față de
+          rail-ul de capitole. */}
+      <div className="max-w-2xl md:ml-auto lg:mr-12">
         <Panel>
           <Kicker>// services.ts — ce construiesc</Kicker>
           <h2 className="mt-3 font-display text-title text-cream">De la idee la site live</h2>
           <ul className="mt-6 space-y-5">
-            {services.map((service, i) => (
-              <FadeUp key={service.index} delay={0.12 + i * 0.08} as="li">
-                <div className="flex gap-4">
-                  <span className="font-mono text-sm text-primary">{service.index}</span>
-                  <div>
-                    <h3 className="font-display text-lg text-cream md:text-xl">{service.title}</h3>
-                    <p className="mt-1.5 text-sm leading-relaxed text-muted">{service.body}</p>
+            {services.map((service, i) => {
+              const Glyph = SERVICE_GLYPHS[service.index];
+              return (
+                <FadeUp key={service.index} delay={0.12 + i * 0.08} as="li">
+                  <div className="flex items-start gap-4">
+                    <div className="flex size-12 shrink-0 items-center justify-center rounded-xl border border-border bg-bg-elevated text-primary lg:size-14">
+                      <Glyph className="size-7 lg:size-8" />
+                    </div>
+                    <div>
+                      <h3 className="font-display text-lg text-cream md:text-xl">
+                        <span className="mr-2 font-mono text-sm text-primary">{service.index}</span>
+                        {service.title}
+                      </h3>
+                      <p className="mt-1.5 text-sm leading-relaxed text-muted">{service.body}</p>
+                    </div>
                   </div>
-                </div>
-              </FadeUp>
-            ))}
+                </FadeUp>
+              );
+            })}
           </ul>
         </Panel>
       </div>
