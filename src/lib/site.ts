@@ -92,7 +92,7 @@ export const services = [
     index: "01",
     title: "Creare site-uri web",
     body: "Ofer servicii complete de creare site-uri web, adaptate nevoilor tale. Fie că ai nevoie de un site de prezentare sau un magazin online, mă asigur că design-ul este creativ și funcțional, pe desktop cât și pe mobil.",
-    image: "/brand/code-desk.jpg",
+    image: "/brand/profile.jpg",
   },
   {
     index: "02",

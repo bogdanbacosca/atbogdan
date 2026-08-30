@@ -11,6 +11,7 @@ import {
   PulseIcon,
   TerminalGlyph,
 } from "@/components/scroll3d/animated-svg";
+import { SkillsMarquee } from "@/components/sections/skills-marquee";
 import { about, cta, differentiators, hero, projects, services, site, skills } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -112,17 +113,22 @@ function HeroChapter() {
         </div>
 
           <FadeUp delay={0.55} className="hidden md:block">
-            <div className="float-slow relative w-fit justify-self-end">
-              <div className="scroll-panel !p-2.5">
-                <img
-                  src="/brand/code-desk.jpg"
-                  alt="Biroul meu de lucru — cod și design pe ecran"
-                  className="aspect-[4/3] w-full max-w-[460px] rounded-xl object-cover"
-                  loading="eager"
-                />
-              </div>
-              <div className="absolute -bottom-5 -left-5 flex size-14 items-center justify-center rounded-2xl border border-border bg-bg-elevated text-primary">
-                <DevGlyph className="size-8" />
+            {/* Lifted a touch higher than dead-center so the profile card
+                reads as a hero anchor; wrapper holds the offset so it
+                composes with the floaty transform animation inside. */}
+            <div className="md:-translate-y-14 lg:-translate-y-20">
+              <div className="float-slow relative w-fit justify-self-end">
+                <div className="scroll-panel !p-2.5">
+                  <img
+                    src="/brand/profile.jpg"
+                    alt="Poză de profil — Bogdan"
+                    className="aspect-[4/3] w-full max-w-[460px] rounded-xl object-cover"
+                    loading="eager"
+                  />
+                </div>
+                <div className="absolute -bottom-5 -left-5 flex size-14 items-center justify-center rounded-2xl border border-border bg-bg-elevated text-primary">
+                  <DevGlyph className="size-8" />
+                </div>
               </div>
             </div>
           </FadeUp>
@@ -349,6 +355,12 @@ export function Scroll3dSections() {
   return (
     <>
       <HeroChapter />
+      {/* Skills marquee restored from the previous layout: an endless band
+          drifting left edge-to-edge. Sits in normal flow between chapters,
+          lifted above the fixed 3D stage like the chapters themselves. */}
+      <div className="relative z-10">
+        <SkillsMarquee />
+      </div>
       <StackChapter />
       <ServicesChapter />
       <PortfolioChapter />
