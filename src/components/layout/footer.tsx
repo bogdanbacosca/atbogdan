@@ -6,7 +6,7 @@ import { FadeUp } from "@/components/motion/fade-up";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-bg-elevated">
+    <footer className="relative z-10 border-t border-border bg-bg">
       <div className="mx-auto grid max-w-[1240px] gap-10 px-5 py-12 md:grid-cols-2 md:px-8 md:py-16 lg:grid-cols-4 lg:px-12">
         <div className="lg:col-span-2">
           <img src={site.logo} alt={site.name} className="h-9 w-auto" />
