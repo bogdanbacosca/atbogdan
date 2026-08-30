@@ -40,10 +40,10 @@ function Chapter({
   );
 }
 
-function Kicker({ children }: { children: ReactNode }) {
+function Kicker({ children, margin }: { children: ReactNode; margin?: string }) {
   return (
     <p className="font-mono text-xs tracking-[0.22em] text-primary uppercase">
-      <AnimatedChars text={String(children)} stagger={0.018} />
+      <AnimatedChars text={String(children)} stagger={0.018} margin={margin} />
     </p>
   );
 }
@@ -243,7 +243,10 @@ function PortfolioChapter() {
     <Chapter id="portofoliu" gridClassName="md:grid md:grid-cols-[1.05fr_0.95fr] lg:pr-24">
       <div className="max-w-xl">
         <Panel>
-          <Kicker>// git log --oneline</Kicker>
+          {/* Trigger earlier than the shared -8% margin: the kicker starts
+              typing while the chapter is still sliding into view, in step
+              with the git-log window animating behind it. */}
+          <Kicker margin="0px 0px 10% 0px">// git log --oneline</Kicker>
           <h2 className="mt-3 font-display text-title text-cream">Proiecte recente</h2>
           <ul className="mt-6 space-y-3">
             {projects.map((project, i) => (

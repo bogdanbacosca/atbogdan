@@ -315,19 +315,19 @@ export function DeployWindow({ sp }: { sp: MotionValue<number> }) {
   return (
     <div className="float-slow w-[min(92vw,440px)]">
       <WindowShell title="deploy.sh — atelier">
-        <RevealLine sp={sp} from={0.86} to={0.877}>
+        <RevealLine sp={sp} from={0.88} to={0.897}>
           <span className="text-primary">$</span> <span className="text-cream/90">npm run build</span>
         </RevealLine>
-        <RevealLine sp={sp} from={0.877} to={0.894} className="text-muted">
+        <RevealLine sp={sp} from={0.897} to={0.914} className="text-muted">
           ✔ build reușit · 312 kB (gzip) · vite 8
         </RevealLine>
-        <RevealLine sp={sp} from={0.894} to={0.911}>
+        <RevealLine sp={sp} from={0.914} to={0.931}>
           <span className="text-primary">$</span> <span className="text-cream/90">npm run deploy -- --prod</span>
         </RevealLine>
-        <RevealLine sp={sp} from={0.911} to={0.929} className="text-muted">
+        <RevealLine sp={sp} from={0.931} to={0.949} className="text-muted">
           ✔ deployment finalizat
         </RevealLine>
-        <RevealLine sp={sp} from={0.929} to={0.947}>
+        <RevealLine sp={sp} from={0.949} to={0.967}>
           <span className="inline-flex items-center gap-2 pt-1 text-blush">
             <Rocket className="size-4 text-primary" />
             site-ul tău, live. → contactează-mă

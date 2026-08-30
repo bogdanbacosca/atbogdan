@@ -12,6 +12,9 @@ type FadeUpProps = {
   y?: number;
   /** Element to render — "span" gets inline-block so transforms apply. */
   as?: "span" | "div" | "li";
+  /** Overrides the whileInView rootMargin — a more-negative bottom margin
+      triggers later (element must be further into the viewport). */
+  margin?: string;
 };
 
 /**
@@ -19,7 +22,7 @@ type FadeUpProps = {
  * view. Use it to animate individual text elements (labels, links, list
  * items) instead of relying on a parent block animation.
  */
-export function FadeUp({ children, className, delay = 0, y = 12, as = "div" }: FadeUpProps) {
+export function FadeUp({ children, className, delay = 0, y = 12, as = "div", margin }: FadeUpProps) {
   const reduce = useHydrationSafeReduce();
 
   if (reduce) {
@@ -40,7 +43,7 @@ export function FadeUp({ children, className, delay = 0, y = 12, as = "div" }: F
       className={cn(as === "span" && "inline-block", className)}
       initial={{ opacity: 0, y, filter: "blur(4px)" }}
       whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-      viewport={{ once: true, margin: "-6% 0px" }}
+      viewport={{ once: true, margin: margin ?? "-6% 0px" }}
       transition={{ duration: 0.55, delay, ease: EASE }}
     >
       {children}

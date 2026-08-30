@@ -12,6 +12,10 @@ type SplitTextProps = {
   stagger?: number;
   /** Extra classes on each animated token (e.g. hover color transitions). */
   innerClassName?: string;
+  /** Overrides the shared whileInView rootMargin. A positive bottom margin
+      (e.g. "0px 0px 10% 0px") triggers earlier — while the element is still
+      below the fold; a more-negative one triggers later. */
+  margin?: string;
 };
 
 /**
@@ -19,7 +23,7 @@ type SplitTextProps = {
  * mask and unblurs, staggered left to right. The full string stays available
  * to screen readers via aria-label.
  */
-export function AnimatedWords({ text, className, delay = 0, stagger = 0.05, innerClassName }: SplitTextProps) {
+export function AnimatedWords({ text, className, delay = 0, stagger = 0.05, innerClassName, margin }: SplitTextProps) {
   const reduce = useHydrationSafeReduce();
   const words = text.split(" ");
 
@@ -32,7 +36,7 @@ export function AnimatedWords({ text, className, delay = 0, stagger = 0.05, inne
       className={cn("inline", className)}
       initial="hidden"
       whileInView="visible"
-      viewport={VIEWPORT}
+      viewport={{ once: true, margin: margin ?? VIEWPORT.margin }}
       transition={{ staggerChildren: stagger, delayChildren: delay }}
       aria-label={text}
     >
@@ -68,7 +72,7 @@ export function AnimatedWords({ text, className, delay = 0, stagger = 0.05, inne
  * indexes): every character rises out of its own mask and unblurs. Spaces are
  * kept as plain, non-animated gaps.
  */
-export function AnimatedChars({ text, className, delay = 0, stagger = 0.025, innerClassName }: SplitTextProps) {
+export function AnimatedChars({ text, className, delay = 0, stagger = 0.025, innerClassName, margin }: SplitTextProps) {
   const reduce = useHydrationSafeReduce();
   const chars = Array.from(text);
 
@@ -81,7 +85,7 @@ export function AnimatedChars({ text, className, delay = 0, stagger = 0.025, inn
       className={cn("inline", className)}
       initial="hidden"
       whileInView="visible"
-      viewport={VIEWPORT}
+      viewport={{ once: true, margin: margin ?? VIEWPORT.margin }}
       transition={{ staggerChildren: stagger, delayChildren: delay }}
       aria-label={text}
     >
@@ -122,7 +126,7 @@ export function AnimatedChars({ text, className, delay = 0, stagger = 0.025, inn
  * rises a few pixels while unblurring, in a fast stagger so long copy reads
  * as a gentle wave rather than a distraction.
  */
-export function AnimatedText({ text, className, delay = 0, stagger = 0.012, innerClassName }: SplitTextProps) {
+export function AnimatedText({ text, className, delay = 0, stagger = 0.012, innerClassName, margin }: SplitTextProps) {
   const reduce = useHydrationSafeReduce();
   const words = text.split(" ");
 
@@ -135,7 +139,7 @@ export function AnimatedText({ text, className, delay = 0, stagger = 0.012, inne
       className={cn("inline", className)}
       initial="hidden"
       whileInView="visible"
-      viewport={VIEWPORT}
+      viewport={{ once: true, margin: margin ?? VIEWPORT.margin }}
       transition={{ staggerChildren: stagger, delayChildren: delay }}
       aria-label={text}
     >

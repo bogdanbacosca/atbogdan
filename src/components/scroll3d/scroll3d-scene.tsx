@@ -102,8 +102,8 @@ function LiveScene() {
   const gRot = useTransform(sp, [0.67, 0.86], [-12, 12]);
   const gZ = useTransform(sp, [0.65, 0.86], [-90, 40]);
 
-  const dOp = useTransform(sp, [0.83, 0.88, 0.99, 1], [0, 1, 1, 0]);
-  const dZ = useTransform(sp, [0.83, 0.96], [110, 0]);
+  const dOp = useTransform(sp, [0.84, 0.89, 0.99, 1], [0, 1, 1, 0]);
+  const dZ = useTransform(sp, [0.84, 0.97], [110, 0]);
 
   return (
     <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
@@ -189,7 +189,7 @@ function LiveScene() {
           {/* ch.5 — deploy */}
           <motion.div
             data-chapter="deploy"
-            className="absolute left-1/2 top-[26%] -translate-x-1/2 -translate-y-1/2 md:top-[24%]"
+            className="absolute left-1/2 top-[26%] -translate-x-1/2 -translate-y-1/2 md:left-[36%] md:top-[24%] lg:left-[24%]"
             style={{ opacity: dOp, z: dZ }}
           >
             <DeployWindow sp={sp} />
