@@ -18,7 +18,7 @@ export function Footer() {
               />
             </span>
           </FadeUp>
-          <p className="mt-4 max-w-md text-sm leading-relaxed text-muted">
+          <p className="footer-tagline mt-4 max-w-md text-sm leading-relaxed text-muted">
             <AnimatedText text={site.tagline} stagger={0.01} />
           </p>
         </div>

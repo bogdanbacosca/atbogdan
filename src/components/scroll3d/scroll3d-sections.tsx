@@ -332,25 +332,30 @@ function StackChapter() {
           </div>
         </Panel>
       </div>
-      <FadeUp
-        delay={0.35}
-        className="mt-12 flex flex-col items-center justify-center gap-7 md:mt-0 md:gap-10"
-      >
+      <div className="mt-12 flex flex-col items-center justify-center gap-7 md:mt-0 md:gap-10">
         {differentiators.slice(0, 2).map((item, i) => (
-          <a
+          <FadeUp
             key={item.id}
-            href={item.href}
-            target="_blank"
-            rel="noreferrer"
-            className={cn(
-              "group w-full max-w-[350px] lg:max-w-[340px]",
-              i === 0 ? "float-slower" : "float-slow",
-            )}
+            /* Individual entrances: the cert paper lands first, the GitHub
+               card follows from a touch further away. */
+            delay={i === 0 ? 0.3 : 0.5}
+            y={i === 0 ? 18 : 28}
+            className="w-full max-w-[350px] lg:max-w-[340px]"
           >
-            <AttachmentCard item={item} variant={item.id === "meta" ? "cert" : "github"} />
-          </a>
+            <a
+              href={item.href}
+              target="_blank"
+              rel="noreferrer"
+              className={cn(
+                "group block w-full",
+                i === 0 ? "float-slower" : "float-slow",
+              )}
+            >
+              <AttachmentCard item={item} variant={item.id === "meta" ? "cert" : "github"} />
+            </a>
+          </FadeUp>
         ))}
-      </FadeUp>
+      </div>
     </Chapter>
   );
 }
