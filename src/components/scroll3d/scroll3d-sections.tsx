@@ -194,7 +194,7 @@ function AttachmentCard({
           "relative transition-[transform,box-shadow] duration-300 ease-out group-hover:-translate-y-1",
           isCert
             ? "rounded-[6px] bg-cream text-ink shadow-[2px_2px_0_0_color-mix(in_oklab,var(--color-ink)_14%,transparent),6px_6px_0_0_color-mix(in_oklab,var(--color-primary)_58%,transparent)] ring-1 ring-ink/15 group-hover:shadow-[3px_3px_0_0_color-mix(in_oklab,var(--color-ink)_14%,transparent),10px_10px_0_0_color-mix(in_oklab,var(--color-primary)_72%,transparent)]"
-            : "rounded-md bg-bg-elevated text-cream shadow-[5px_5px_0_0_color-mix(in_oklab,var(--color-cream)_20%,transparent)] ring-1 ring-cream/12 group-hover:shadow-[8px_8px_0_0_color-mix(in_oklab,var(--color-cream)_32%,transparent)]",
+            : "rounded-[6px] bg-bg-elevated text-cream shadow-[2px_2px_0_0_color-mix(in_oklab,var(--color-cream)_18%,transparent),6px_6px_0_0_color-mix(in_oklab,var(--color-primary)_55%,transparent)] ring-1 ring-cream/15 group-hover:shadow-[3px_3px_0_0_color-mix(in_oklab,var(--color-cream)_22%,transparent),10px_10px_0_0_color-mix(in_oklab,var(--color-primary)_70%,transparent)]",
         )}
       >
         <span
@@ -205,11 +205,9 @@ function AttachmentCard({
         >
           {isCert ? "cert." : "github"}
         </span>
-        {isCert ? (
-          <span aria-hidden="true" className="absolute inset-y-0 left-0 w-1.5 rounded-l-[6px] bg-primary" />
-        ) : null}
+        <span aria-hidden="true" className="absolute inset-y-0 left-0 w-1.5 rounded-l-[6px] bg-primary" />
 
-        <div className={cn("relative overflow-hidden", isCert ? "rounded-[6px] pl-1.5" : "rounded-md")}>
+        <div className="relative overflow-hidden rounded-[6px] pl-1.5">
           {isCert ? (
             <>
               {/* classic certificate double-rule frame */}
@@ -345,7 +343,7 @@ function StackChapter() {
             target="_blank"
             rel="noreferrer"
             className={cn(
-              "group w-full max-w-[320px] lg:max-w-[340px]",
+              "group w-full max-w-[350px] lg:max-w-[340px]",
               i === 0 ? "float-slower" : "float-slow",
             )}
           >
