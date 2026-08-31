@@ -117,7 +117,7 @@ function HeroChapter() {
           href="#stack"
           className="flex flex-col items-center gap-2 font-mono text-xs tracking-[0.18em] text-muted uppercase transition-colors hover:text-cream"
         >
-          derulează pentru a explora
+          <AnimatedChars text="derulează pentru a explora" delay={1.05} stagger={0.02} />
           <ChevronDown className="nudge size-4 text-primary" />
         </a>
       </div>
@@ -316,8 +316,12 @@ function StackChapter() {
       <div className="max-w-xl">
         <Panel>
           <Kicker>// about.ts — despre mine</Kicker>
-          <h2 className="mt-3 font-display text-title text-cream">{about.title}</h2>
-          <p className="mt-4 text-sm leading-relaxed text-muted md:text-lead">{about.body}</p>
+          <h2 className="mt-3 font-display text-title text-cream">
+            <AnimatedWords text={about.title} delay={0.1} />
+          </h2>
+          <p className="mt-4 text-sm leading-relaxed text-muted md:text-lead">
+            <AnimatedText text={about.body} delay={0.2} stagger={0.008} />
+          </p>
 
           <div className="mt-6 flex flex-wrap gap-2">
             {skills.map((skill, i) => (
@@ -374,7 +378,9 @@ function ServicesChapter() {
       <div className="max-w-2xl md:ml-auto lg:mr-12">
         <Panel>
           <Kicker>// services.ts — ce construiesc</Kicker>
-          <h2 className="mt-3 font-display text-title text-cream">De la idee la site live</h2>
+          <h2 className="mt-3 font-display text-title text-cream">
+            <AnimatedWords text="De la idee la site live" delay={0.1} />
+          </h2>
           <ul className="mt-6 space-y-5">
             {services.map((service, i) => {
               const Glyph = SERVICE_GLYPHS[service.index];
@@ -415,7 +421,9 @@ function PortfolioChapter() {
               typing while the chapter is still sliding into view, in step
               with the git-log window animating behind it. */}
           <Kicker margin="0px 0px 10% 0px">// git log --oneline</Kicker>
-          <h2 className="mt-3 font-display text-title text-cream">Proiecte recente</h2>
+          <h2 className="mt-3 font-display text-title text-cream">
+            <AnimatedWords text="Proiecte recente" delay={0.1} />
+          </h2>
           <ul className="mt-6 space-y-3">
             {projects.map((project, i) => (
               <FadeUp key={project.slug} delay={0.12 + i * 0.08} as="li">
@@ -465,8 +473,12 @@ function ContactChapter() {
       <div className="mx-auto max-w-2xl text-center">
         <Panel>
           <Kicker>// deploy.sh — lansare</Kicker>
-          <h2 className="mt-3 font-display text-title text-cream">{cta.title}</h2>
-          <p className="mt-3 text-lead text-muted">{cta.body}</p>
+          <h2 className="mt-3 font-display text-title text-cream">
+            <AnimatedWords text={cta.title} delay={0.1} />
+          </h2>
+          <p className="mt-3 text-lead text-muted">
+            <AnimatedText text={cta.body} delay={0.2} />
+          </p>
           <FadeUp delay={0.25} className="mt-7 flex justify-center">
             <Magnetic>
               <Button asChild size="lg">

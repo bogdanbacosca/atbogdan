@@ -284,6 +284,27 @@
   }
 }
 
+/* Footer brand lockup: a slow "breathing" glow so the wordmark feels alive
+   like the spinning header mark, without rotating a wide logo. */
+@keyframes footer-logo-pulse {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0px color-mix(in oklab, var(--color-primary) 0%, transparent));
+  }
+  50% {
+    filter: drop-shadow(0 0 16px color-mix(in oklab, var(--color-primary) 42%, transparent));
+  }
+}
+.footer-logo {
+  animation: footer-logo-pulse 7s ease-in-out infinite;
+  will-change: filter;
+}
+@media (prefers-reduced-motion: reduce) {
+  .footer-logo {
+    animation: none;
+  }
+}
+
 /* Radius of the rotating 3D skill ring (responsive).
    12 cards share the circle, so the chord distance between neighbours
    (2·R·sin15°) must stay above the card width + a gap to avoid overlap. */
