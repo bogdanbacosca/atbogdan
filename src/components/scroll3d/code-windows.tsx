@@ -1,5 +1,5 @@
 import { motion, useTransform, type MotionValue } from "motion/react";
-import { GitBranch, Rocket } from "lucide-react";
+import { Check, GitBranch } from "lucide-react";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
@@ -81,10 +81,10 @@ export function TerminalWindow({ sp }: { sp: MotionValue<number> }) {
         </RevealLine>
         <RevealLine sp={sp} from={0.084} to={0.104}>
           <span className="text-primary">$</span> <span className="text-cream/90">npm create site</span>{" "}
-          <span className="text-blush">&quot;--craft&nbsp;custom&quot;</span>
+          <span className="text-blush">"--craft&nbsp;custom"</span>
         </RevealLine>
         <RevealLine sp={sp} from={0.105} to={0.125} className="text-muted">
-          ✔ template „responsive &amp; fast&quot; applied
+          ✔ template „responsive & fast" applied
         </RevealLine>
         <RevealLine sp={sp} from={0.124} to={0.146}>
           <span className="text-primary">$</span> <span className="text-cream/90">npm run dev</span>
@@ -245,32 +245,144 @@ export function GitWindow({ sp }: { sp: MotionValue<number> }) {
 }
 
 /* ------------------------------------------------------------------ */
-/* Ch. 5 — Deploy window                                               */
+/* Ch. 5 — Launch seal (not another terminal)                          */
 /* ------------------------------------------------------------------ */
 
+const LAUNCH_R = 96;
+const LAUNCH_TICKS = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330];
+
 export function DeployWindow({ sp }: { sp: MotionValue<number> }) {
+  const progress = useTransform(sp, [0.88, 0.965], [0, 1]);
+  const stampScale = useTransform(sp, [0.925, 0.952, 0.97], [0.6, 1.14, 1]);
+  const stampOp = useTransform(sp, [0.925, 0.948], [0, 1]);
+  // The stamp lands slightly askew and settles — like ink meeting paper.
+  const stampRot = useTransform(sp, [0.925, 0.945, 0.97], [-9, 3.5, -1]);
+  const glowOp = useTransform(sp, [0.88, 0.97], [0.16, 0.5]);
+  const ringRot = useTransform(sp, [0.84, 1], [-14, 16]);
+  /* Radar pings rippling out as the seal is struck. */
+  const ping1Scale = useTransform(sp, [0.925, 0.955, 0.99], [0.55, 1.45, 1.9]);
+  const ping1Op = useTransform(sp, [0.925, 0.945, 0.99], [0, 0.55, 0]);
+  const ping2Scale = useTransform(sp, [0.932, 0.962, 0.99], [0.55, 1.3, 1.62]);
+  const ping2Op = useTransform(sp, [0.932, 0.962, 0.99], [0, 0.4, 0]);
+
   return (
-    <div className="float-slow w-[min(92vw,440px)]">
-      <WindowShell title="deploy.sh — atelier">
-        <RevealLine sp={sp} from={0.88} to={0.897}>
-          <span className="text-primary">$</span> <span className="text-cream/90">npm run build</span>
+    <div className="float-slow relative aspect-square w-[min(78vw,340px)]">
+      <motion.div
+        aria-hidden="true"
+        className="absolute inset-[-8%] rounded-full bg-primary blur-3xl"
+        style={{ opacity: glowOp }}
+      />
+
+      {/* Deployment ping — two rippling rings when the LIVE stamp lands. */}
+      <motion.div
+        aria-hidden="true"
+        className="absolute inset-0 rounded-full border-2 border-primary/70"
+        style={{ scale: ping1Scale, opacity: ping1Op }}
+      />
+      <motion.div
+        aria-hidden="true"
+        className="absolute inset-0 rounded-full border border-blush/60"
+        style={{ scale: ping2Scale, opacity: ping2Op }}
+      />
+
+      <motion.div aria-hidden="true" className="absolute inset-[-18%]" style={{ rotate: ringRot }}>
+        <svg viewBox="0 0 220 220" className="size-full">
+          {LAUNCH_TICKS.map((deg) => (
+            <line
+              key={deg}
+              x1="110"
+              y1="7"
+              x2="110"
+              y2={deg % 90 === 0 ? 18 : 13}
+              stroke="currentColor"
+              strokeWidth={deg % 90 === 0 ? 1.7 : 1}
+              transform={`rotate(${deg} 110 110)`}
+              className={deg % 90 === 0 ? "text-primary/85" : "text-cream/30"}
+            />
+          ))}
+          <circle
+            cx="110"
+            cy="110"
+            r="104"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="0.7"
+            className="text-cream/20"
+          />
+          <motion.circle
+            cx="110"
+            cy="110"
+            r={LAUNCH_R}
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            transform="rotate(-90 110 110)"
+            className="text-primary"
+            style={{ pathLength: progress }}
+          />
+        </svg>
+        <div className="orbit-spin pointer-events-none absolute inset-0">
+          <svg viewBox="0 0 220 220" className="size-full">
+            <circle
+              cx="110"
+              cy="110"
+              r="100"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.15"
+              strokeDasharray="2.5 9"
+              className="text-cream/40"
+            />
+          </svg>
+        </div>
+      </motion.div>
+
+      <div className="relative flex size-full flex-col items-center justify-center rounded-full border border-cream/15 bg-bg-elevated shadow-[inset_0_1px_0_color-mix(in_oklab,white_10%,transparent),0_28px_70px_-24px_rgba(0,0,0,0.88)]">
+        <RevealLine
+          sp={sp}
+          from={0.88}
+          to={0.9}
+          className="font-mono text-[10px] tracking-[0.22em] text-primary uppercase"
+        >
+          deploy.sh
         </RevealLine>
-        <RevealLine sp={sp} from={0.897} to={0.914} className="text-muted">
-          ✔ build reușit · 312 kB (gzip) · vite 8
+
+        <motion.div
+          className="relative mt-5 mb-3 flex size-[5.5rem] items-center justify-center rounded-full bg-primary will-change-transform"
+          style={{ scale: stampScale, opacity: stampOp, rotate: stampRot }}
+        >
+          <span aria-hidden="true" className="absolute inset-1.5 rounded-full border border-cream/50" />
+          <span aria-hidden="true" className="absolute inset-3 rounded-full border border-cream/20" />
+          <span className="font-display text-xl tracking-[0.22em] text-cream">LIVE</span>
+        </motion.div>
+
+        <RevealLine sp={sp} from={0.94} to={0.958} className="font-display text-lg text-cream">
+          site-ul tău
         </RevealLine>
-        <RevealLine sp={sp} from={0.914} to={0.931}>
-          <span className="text-primary">$</span> <span className="text-cream/90">npm run deploy -- --prod</span>
+        <RevealLine
+          sp={sp}
+          from={0.95}
+          to={0.968}
+          className="mt-1 font-mono text-[11px] tracking-[0.16em] text-muted uppercase"
+        >
+          live · gata de lansare
         </RevealLine>
-        <RevealLine sp={sp} from={0.931} to={0.949} className="text-muted">
-          ✔ deployment finalizat
-        </RevealLine>
-        <RevealLine sp={sp} from={0.949} to={0.967}>
-          <span className="inline-flex items-center gap-2 pt-1 text-blush">
-            <Rocket className="size-4 text-primary" />
-            site-ul tău, live. → contactează-mă
+        <RevealLine
+          sp={sp}
+          from={0.955}
+          to={0.972}
+          className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-border bg-bg px-3 py-1 font-mono text-[10px] tracking-wide text-muted"
+        >
+          <span
+            aria-hidden="true"
+            className="flex size-3.5 items-center justify-center rounded-full bg-primary"
+          >
+            <Check className="size-2.5 text-cream" />
           </span>
+          site-ul-tau.ro
         </RevealLine>
-      </WindowShell>
+      </div>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowDownRight, ArrowRight, ArrowUpRight, ChevronDown, Mail, Phone } from "lucide-react";
+import { ArrowDownRight, ArrowRight, ArrowUpRight, ChevronDown, GitBranch, Github, Mail, Phone } from "lucide-react";
 import type { ReactNode } from "react";
 import { AnimatedChars, AnimatedText, AnimatedWords } from "@/components/motion/animated-text";
 import { FadeUp } from "@/components/motion/fade-up";
@@ -66,7 +66,7 @@ function HeroChapter() {
     <Chapter id="start">
       <div className="mx-auto grid w-full max-w-[1240px] items-center gap-8 md:grid-cols-[1.05fr_0.95fr] lg:pr-24">
         <div className="text-glow">
-          <Kicker>// import &#123; site &#125; din &quot;@bogdan&quot;</Kicker>
+          <Kicker>// import &#123; site &#125; din "@bogdan"</Kicker>
           <h1 className="mt-4 font-display text-display text-cream">
             <AnimatedWords text={hero.title} delay={0.15} stagger={0.05} />
           </h1>
@@ -129,6 +129,183 @@ function HeroChapter() {
 /* Ch. 2 — Stack / despre                                              */
 /* ------------------------------------------------------------------ */
 
+function PaperclipMark({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 28 44" fill="none" aria-hidden="true" className={className}>
+      <path
+        d="M10 16V8.5c0-3.3 2.7-5.5 5.5-5.5S21 5.2 21 8.5v23c0 5-4 8.5-8.5 8.5S4 36.5 4 31.5V14c0-2.5 2-4.5 4.5-4.5S13 11.5 13 14v16"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function DiplomaSeal({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 48 48" aria-hidden="true" className={className}>
+      <circle cx="24" cy="24" r="22" fill="currentColor" />
+      <circle cx="24" cy="24" r="16.5" fill="none" stroke="var(--color-cream)" strokeWidth="1.4" />
+      <circle cx="24" cy="24" r="11" fill="none" stroke="var(--color-cream)" strokeWidth="1" />
+      <path
+        d="M18 24.5 L22 28.5 L31 18"
+        fill="none"
+        stroke="var(--color-cream)"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+const GH_HEAT = [
+  0.18, 0.42, 0.72, 0.28, 0.95, 0.55, 0.22, 0.8,
+  0.35, 0.88, 0.48, 0.16, 0.64, 0.32, 0.84, 0.5,
+  0.22, 0.76, 0.4, 1, 0.3, 0.58, 0.2, 0.9,
+];
+
+function AttachmentCard({
+  item,
+  variant,
+}: {
+  item: (typeof differentiators)[number];
+  variant: "cert" | "github";
+}) {
+  const isCert = variant === "cert";
+  return (
+    <div className="relative">
+      {/* Each card is pinned with its own mark: a paperclip for the paper
+          document, a GitHub monogram for the open-source profile. */}
+      {isCert ? (
+        <PaperclipMark className="pointer-events-none absolute -top-4 left-5 z-20 h-11 w-7 -rotate-[18deg] text-ink/75 drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]" />
+      ) : (
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-3 left-6 z-20 flex size-9 items-center justify-center rounded-full border border-primary/40 bg-bg-elevated text-primary shadow-[0_6px_18px_-6px_rgba(0,0,0,0.7)]"
+        >
+          <Github className="size-4" />
+        </span>
+      )}
+      <div
+        className={cn(
+          "relative transition-[transform,box-shadow] duration-300 ease-out group-hover:-translate-y-1",
+          isCert
+            ? "rounded-[6px] bg-cream text-ink shadow-[2px_2px_0_0_color-mix(in_oklab,var(--color-ink)_14%,transparent),6px_6px_0_0_color-mix(in_oklab,var(--color-primary)_58%,transparent)] ring-1 ring-ink/15 group-hover:shadow-[3px_3px_0_0_color-mix(in_oklab,var(--color-ink)_14%,transparent),10px_10px_0_0_color-mix(in_oklab,var(--color-primary)_72%,transparent)]"
+            : "rounded-md bg-bg-elevated text-cream shadow-[5px_5px_0_0_color-mix(in_oklab,var(--color-cream)_20%,transparent)] ring-1 ring-cream/12 group-hover:shadow-[8px_8px_0_0_color-mix(in_oklab,var(--color-cream)_32%,transparent)]",
+        )}
+      >
+        <span
+          className={cn(
+            "absolute -top-2.5 right-6 z-10 rounded-t-md px-2.5 py-0.5 font-mono text-[10px] tracking-[0.18em] uppercase",
+            isCert ? "bg-primary text-cream" : "border border-primary/40 bg-bg text-primary",
+          )}
+        >
+          {isCert ? "cert." : "github"}
+        </span>
+        {isCert ? (
+          <span aria-hidden="true" className="absolute inset-y-0 left-0 w-1.5 rounded-l-[6px] bg-primary" />
+        ) : null}
+
+        <div className={cn("relative overflow-hidden", isCert ? "rounded-[6px] pl-1.5" : "rounded-md")}>
+          {isCert ? (
+            <>
+              {/* classic certificate double-rule frame */}
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-[6px] z-10 rounded-[3px] border border-ink/10"
+              />
+              {/* folded page corner */}
+              <span
+                aria-hidden="true"
+                className="absolute right-0 bottom-0 z-10 size-0 border-b-[12px] border-l-[12px] border-b-ink/10 border-l-transparent"
+              />
+              <div className="p-1.5 pb-0">
+                <div className="relative overflow-hidden rounded-[4px] ring-1 ring-ink/10">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="aspect-[16/9] w-full object-cover outline outline-1 -outline-offset-1 outline-ink/15 transition-transform duration-500 group-hover:scale-[1.04]"
+                    loading="lazy"
+                  />
+                  <DiplomaSeal className="absolute right-2 bottom-2 size-10 text-primary drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)]" />
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="flex items-center justify-between gap-2 border-b border-cream/10 bg-bg px-3 py-1.5 font-mono text-[10px] tracking-wide text-muted">
+                <span className="flex items-center gap-2">
+                  <span aria-hidden="true" className="size-1.5 rounded-full bg-primary" />
+                  bogdanbacosca
+                  <span className="text-cream/25">/</span>
+                  <span className="text-cream/80">open-source</span>
+                </span>
+                <GitBranch aria-hidden="true" className="size-3 text-muted/70" />
+              </div>
+              <div className="overflow-hidden">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="aspect-[16/9] w-full object-cover opacity-90 outline outline-1 -outline-offset-1 outline-cream/10 transition-[transform,opacity] duration-500 group-hover:scale-[1.04] group-hover:opacity-100"
+                  loading="lazy"
+                />
+              </div>
+              <div className="grid grid-cols-8 gap-1 px-3 py-2.5" aria-hidden="true">
+                {GH_HEAT.map((op, i) => (
+                  <span
+                    key={i}
+                    className="aspect-square rounded-[2px] bg-primary ring-1 ring-inset ring-cream/10"
+                    style={{ opacity: op }}
+                  />
+                ))}
+              </div>
+            </>
+          )}
+
+          <div className={cn("px-4 pb-4", isCert ? "pt-3" : "pt-1")}>
+            <p
+              className={cn(
+                "font-mono text-[10px] tracking-[0.18em] uppercase",
+                isCert ? "text-primary" : "text-primary",
+              )}
+            >
+              {item.eyebrow}
+            </p>
+            <h3
+              className={cn(
+                "mt-1.5 font-display text-lg md:text-xl",
+                isCert ? "text-ink" : "text-cream",
+              )}
+            >
+              {item.title}
+            </h3>
+            <p
+              className={cn(
+                "mt-1 text-sm leading-relaxed",
+                isCert ? "text-ink/60" : "text-muted",
+              )}
+            >
+              {item.body}
+            </p>
+            <span
+              className={cn(
+                "mt-2.5 inline-flex items-center gap-1.5 font-mono text-xs tracking-[0.1em] uppercase transition-colors",
+                isCert ? "text-ink group-hover:text-primary" : "text-cream group-hover:text-primary",
+              )}
+            >
+              {item.cta}
+              <ArrowUpRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function StackChapter() {
   return (
     <Chapter
@@ -168,37 +345,7 @@ function StackChapter() {
               i === 0 ? "float-slower" : "float-slow",
             )}
           >
-            {/* Distinct "attachment" card: flatter glass, inset thumbnail and
-                a corner tag — visually lighter than the main panel so the
-                certificate / open-source notes read as supporting material. */}
-            <div className="overflow-hidden rounded-xl border border-border/60 bg-bg/55 backdrop-blur-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:border-primary/50 group-hover:bg-bg/75">
-              <div className="p-2.5 pb-0">
-                <div className="overflow-hidden rounded-lg border border-border/80 bg-bg-elevated/40">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="aspect-[16/9] w-full object-cover opacity-90 transition-[transform,opacity] duration-500 group-hover:scale-[1.04] group-hover:opacity-100"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-              <div className="px-4 pt-3 pb-4">
-                <div className="flex items-center justify-between gap-3">
-                  <p className="font-mono text-[10px] tracking-[0.18em] text-primary uppercase">
-                    {item.eyebrow}
-                  </p>
-                  <span className="rounded-full border border-border bg-bg-elevated/80 px-2 py-0.5 font-mono text-[10px] text-muted">
-                    {i === 0 ? ".pdf" : "github"}
-                  </span>
-                </div>
-                <h3 className="mt-1.5 font-display text-lg text-cream md:text-xl">{item.title}</h3>
-                <p className="mt-1 text-sm leading-relaxed text-muted">{item.body}</p>
-                <span className="mt-2.5 inline-flex items-center gap-1.5 font-mono text-xs tracking-[0.1em] text-cream uppercase transition-colors group-hover:text-primary">
-                  {item.cta}
-                  <ArrowUpRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </span>
-              </div>
-            </div>
+            <AttachmentCard item={item} variant={item.id === "meta" ? "cert" : "github"} />
           </a>
         ))}
       </FadeUp>

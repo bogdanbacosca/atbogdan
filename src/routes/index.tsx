@@ -9,7 +9,7 @@ export const Route = createFileRoute("/")({ component: Home });
 /**
  * Home — a whole-page 3D scroll experience themed around the dev workspace:
  * a fixed preserve-3d stage (terminal → editor → git log →
- * deploy) is fly-through driven by the native scroll position, with the five
+ * launch seal) is fly-through driven by the native scroll position, with the five
  * content chapters wrapped around it. No mouse/wheel event handling: touch,
  * keyboard, scrollbar and anchor links all drive the same animation.
  */

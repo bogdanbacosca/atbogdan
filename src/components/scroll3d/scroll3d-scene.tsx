@@ -196,7 +196,7 @@ function LiveScene() {
             <GitWindow sp={sp} />
           </motion.div>
 
-          {/* ch.5 — deploy */}
+          {/* ch.5 — launch seal (circular LIVE stamp, not another terminal) */}
           <motion.div
             data-chapter="deploy"
             className="absolute left-1/2 top-[26%] -translate-x-1/2 -translate-y-1/2 md:left-[36%] md:top-[24%] lg:left-[24%]"

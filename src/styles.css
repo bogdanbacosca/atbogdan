@@ -326,6 +326,25 @@
   }
 }
 
+/* Slow orbit for the launch-seal dashed ring (ch.5 finale). */
+@keyframes orbit-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.orbit-spin {
+  animation: orbit-spin 22s linear infinite;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .orbit-spin {
+    animation: none;
+  }
+}
+
 /* Translucent glass card used by the sections wrapped around the scene. */
 .scroll-panel {
   border-radius: var(--radius-lg);
