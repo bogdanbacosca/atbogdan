@@ -227,7 +227,7 @@ function AttachmentCard({
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="aspect-[16/9] w-full object-cover outline outline-1 -outline-offset-1 outline-ink/15 transition-transform duration-500 group-hover:scale-[1.04]"
+                    className="aspect-[21/9] w-full object-cover outline outline-1 -outline-offset-1 outline-ink/15 transition-transform duration-500 group-hover:scale-[1.04]"
                     loading="lazy"
                   />
                   <DiplomaSeal className="absolute right-2 bottom-2 size-10 text-primary drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)]" />
@@ -249,15 +249,15 @@ function AttachmentCard({
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="aspect-[16/9] w-full object-cover opacity-90 outline outline-1 -outline-offset-1 outline-cream/10 transition-[transform,opacity] duration-500 group-hover:scale-[1.04] group-hover:opacity-100"
+                  className="aspect-[21/9] w-full object-cover opacity-90 outline outline-1 -outline-offset-1 outline-cream/10 transition-[transform,opacity] duration-500 group-hover:scale-[1.04] group-hover:opacity-100"
                   loading="lazy"
                 />
               </div>
-              <div className="grid grid-cols-8 gap-1 px-3 py-2.5" aria-hidden="true">
+              <div className="flex flex-wrap justify-between px-3 py-2" aria-hidden="true">
                 {GH_HEAT.map((op, i) => (
                   <span
                     key={i}
-                    className="aspect-square rounded-[2px] bg-primary ring-1 ring-inset ring-cream/10"
+                    className="size-2 rounded-[2px] bg-primary ring-1 ring-inset ring-cream/10"
                     style={{ opacity: op }}
                   />
                 ))}
@@ -332,7 +332,7 @@ function StackChapter() {
       </div>
       <FadeUp
         delay={0.35}
-        className="mt-12 flex flex-col items-center justify-center gap-7 md:mt-0 md:gap-9"
+        className="mt-12 flex flex-col items-center justify-center gap-7 md:mt-0 md:gap-10"
       >
         {differentiators.slice(0, 2).map((item, i) => (
           <a
@@ -341,7 +341,7 @@ function StackChapter() {
             target="_blank"
             rel="noreferrer"
             className={cn(
-              "group w-full max-w-[340px] lg:max-w-[380px]",
+              "group w-full max-w-[320px] lg:max-w-[340px]",
               i === 0 ? "float-slower" : "float-slow",
             )}
           >
