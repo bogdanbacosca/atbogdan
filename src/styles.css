@@ -258,18 +258,71 @@
   animation: nudge 1.8s ease-in-out infinite;
 }
 
-/* Radius of the 3D tech-card carousel (responsive). */
-.stack-ring {
-  --ring-r: 108px;
+/* Animated brand mark in the header: a slow, elegant spin with a soft
+   primary glow. Reduced-motion users get a calm, static mark. */
+@keyframes logo-animate {
+  0% {
+    transform: rotate(0deg) scale(1);
+    filter: drop-shadow(0 0 0px color-mix(in oklab, var(--color-primary) 0%, transparent));
+  }
+  50% {
+    transform: rotate(180deg) scale(1.04);
+    filter: drop-shadow(0 0 14px color-mix(in oklab, var(--color-primary) 48%, transparent));
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+    filter: drop-shadow(0 0 0px color-mix(in oklab, var(--color-primary) 0%, transparent));
+  }
+}
+.logo-animate {
+  animation: logo-animate 14s linear infinite;
+  will-change: transform, filter;
+}
+@media (prefers-reduced-motion: reduce) {
+  .logo-animate {
+    animation: none;
+  }
+}
+
+/* Radius of the rotating 3D skill ring (responsive).
+   12 cards share the circle, so the chord distance between neighbours
+   (2·R·sin15°) must stay above the card width + a gap to avoid overlap. */
+.wheel-ring {
+  --wheel-r: 162px;
 }
 @media (min-width: 640px) {
-  .stack-ring {
-    --ring-r: 148px;
+  .wheel-ring {
+    --wheel-r: 212px;
   }
 }
 @media (min-width: 1024px) {
-  .stack-ring {
-    --ring-r: 200px;
+  .wheel-ring {
+    --wheel-r: 220px;
+  }
+}
+@media (min-width: 1280px) {
+  .wheel-ring {
+    --wheel-r: 228px;
+  }
+}
+
+/* Continuous 3D spin for the skill ring, gated by prefers-reduced-motion. */
+@keyframes wheel-spin {
+  from {
+    transform: rotateX(-10deg) rotateY(0deg);
+  }
+  to {
+    transform: rotateX(-10deg) rotateY(360deg);
+  }
+}
+.wheel-spin {
+  animation: wheel-spin 30s linear infinite;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .wheel-spin {
+    animation: none;
   }
 }
 

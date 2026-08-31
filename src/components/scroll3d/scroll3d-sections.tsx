@@ -19,17 +19,22 @@ function Chapter({
   className,
   children,
   gridClassName,
+  paddingClassName,
 }: {
   id: string;
   className?: string;
   children: ReactNode;
   gridClassName?: string;
+  /** Overrides the default vertical padding (used to open a wider gutter
+      where the background skill ring shows through). */
+  paddingClassName?: string;
 }) {
   return (
     <section
       id={id}
       className={cn(
-        "relative z-10 flex min-h-svh scroll-mt-24 items-center py-24 md:py-28",
+        "relative z-10 flex min-h-svh scroll-mt-24 items-center",
+        paddingClassName ?? "py-24 md:py-28",
         className,
       )}
     >
@@ -126,7 +131,11 @@ function HeroChapter() {
 
 function StackChapter() {
   return (
-    <Chapter id="stack" gridClassName="md:grid md:grid-cols-[1.05fr_0.95fr] lg:pr-24">
+    <Chapter
+      id="stack"
+      paddingClassName="py-24 pb-48 md:pb-64"
+      gridClassName="md:grid md:grid-cols-[1.05fr_0.95fr] lg:pr-24"
+    >
       <div className="max-w-xl">
         <Panel>
           <Kicker>// about.ts — despre mine</Kicker>
@@ -159,19 +168,31 @@ function StackChapter() {
               i === 0 ? "float-slower" : "float-slow",
             )}
           >
-            <div className="scroll-panel overflow-hidden !p-3 transition-transform duration-300 group-hover:-translate-y-1">
-              <img
-                src={item.image}
-                alt={item.title}
-                className="aspect-[16/10] w-full rounded-lg object-cover"
-                loading="lazy"
-              />
-              <div className="px-2 pb-1 pt-3.5 text-center">
-                <p className="font-mono text-[11px] tracking-[0.16em] text-primary uppercase">
-                  {item.eyebrow}
-                </p>
-                <h3 className="mt-1 font-display text-lg text-cream md:text-xl">{item.title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-muted">{item.body}</p>
+            {/* Distinct "attachment" card: flatter glass, inset thumbnail and
+                a corner tag — visually lighter than the main panel so the
+                certificate / open-source notes read as supporting material. */}
+            <div className="overflow-hidden rounded-xl border border-border/60 bg-bg/55 backdrop-blur-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:border-primary/50 group-hover:bg-bg/75">
+              <div className="p-2.5 pb-0">
+                <div className="overflow-hidden rounded-lg border border-border/80 bg-bg-elevated/40">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="aspect-[16/9] w-full object-cover opacity-90 transition-[transform,opacity] duration-500 group-hover:scale-[1.04] group-hover:opacity-100"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+              <div className="px-4 pt-3 pb-4">
+                <div className="flex items-center justify-between gap-3">
+                  <p className="font-mono text-[10px] tracking-[0.18em] text-primary uppercase">
+                    {item.eyebrow}
+                  </p>
+                  <span className="rounded-full border border-border bg-bg-elevated/80 px-2 py-0.5 font-mono text-[10px] text-muted">
+                    {i === 0 ? ".pdf" : "github"}
+                  </span>
+                </div>
+                <h3 className="mt-1.5 font-display text-lg text-cream md:text-xl">{item.title}</h3>
+                <p className="mt-1 text-sm leading-relaxed text-muted">{item.body}</p>
                 <span className="mt-2.5 inline-flex items-center gap-1.5 font-mono text-xs tracking-[0.1em] text-cream uppercase transition-colors group-hover:text-primary">
                   {item.cta}
                   <ArrowUpRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -199,7 +220,7 @@ const SERVICE_GLYPHS: Record<(typeof services)[number]["index"], typeof Responsi
 
 function ServicesChapter() {
   return (
-    <Chapter id="servicii" gridClassName="lg:pr-24">
+    <Chapter id="servicii" paddingClassName="py-24 pt-48 md:pt-64" gridClassName="lg:pr-24">
       {/* Casetă aliniată la dreapta: fereastra de editor care se animă în
           stânga scenei rămâne vizibilă, iar mr-ul ține distanța față de
           rail-ul de capitole. */}
@@ -346,6 +367,9 @@ export function Scroll3dSections() {
         <SkillsMarquee />
       </div>
       <StackChapter />
+      {/* The 3D skill ring lives in the fixed background stage, visible in
+          the spacious gutter opened by the padding above and below — it reads
+          as part of the page instead of its own isolated band. */}
       <ServicesChapter />
       <PortfolioChapter />
       <ContactChapter />

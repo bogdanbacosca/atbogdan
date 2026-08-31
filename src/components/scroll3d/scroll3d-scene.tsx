@@ -4,10 +4,10 @@ import {
   DeployWindow,
   EditorWindow,
   GitWindow,
-  StackRing,
   TerminalWindow,
 } from "@/components/scroll3d/code-windows";
 import { STARS } from "@/components/scroll3d/rand";
+import { SkillsRing } from "@/components/sections/skills-wheel";
 
 /**
  * The fixed 3D stage behind the whole homepage. The entire page scroll is
@@ -83,15 +83,22 @@ function LiveScene() {
   /* Chapter visibility + hero-object travel.
      The terminal ("bash — atelier@bogdan") leaves the stage early — fully
      gone by ~0.15 progress, before the skills marquee band scrolls through,
-     so the two never overlap on screen. */
+     so the two never overlap on screen. The skill ring (ch.2) lives in the
+     world too, surfacing in the open gutter between the stack and services
+     chapters — their extra padding carves the space. */
   const tOp = useTransform(sp, [0.0, 0.05, 0.1, 0.15], [0, 1, 1, 0]);
   const tRot = useTransform(sp, [0, 0.08, 0.15], [14, 5, -8]);
   const tZ = useTransform(sp, [0, 0.15], [60, -70]);
   const tY = useTransform(sp, [0, 0.15], [-16, 20]);
 
-  const sOp = useTransform(sp, [0.2, 0.26, 0.43, 0.49], [0, 1, 1, 0]);
-  const sZ = useTransform(sp, [0.2, 0.46], [-80, 60]);
-  const sY = useTransform(sp, [0.2, 0.46], [26, -22]);
+  /* ch.2 — skill ring: a 12-card 3D wheel anchored in the world, visible only
+     in the gutter between stack and services. It recedes as the stack chapter
+     runs off screen, eases forward while the padding scrolls through, then
+     fades before the services panel arrives — the same travelling language as
+     the other stage objects. */
+  const wOp = useTransform(sp, [0.34, 0.42, 0.56, 0.63], [0, 1, 1, 0]);
+  const wZ = useTransform(sp, [0.34, 0.56], [-130, 70]);
+  const wY = useTransform(sp, [0.34, 0.56], [60, -60]);
 
   const eOp = useTransform(sp, [0.46, 0.53, 0.67, 0.73], [0, 1, 1, 0]);
   const eRot = useTransform(sp, [0.5, 0.7], [10, -8]);
@@ -159,13 +166,16 @@ function LiveScene() {
             <TerminalWindow sp={sp} />
           </motion.div>
 
-          {/* ch.2 — stack ring */}
+          {/* ch.2 — skill ring: anchored in the world like the other stage
+              objects, surfacing in the open gutter between the stack and
+              services chapters. */}
           <motion.div
-            data-chapter="ring"
-            className="absolute left-1/2 top-[56%] -translate-x-1/2 -translate-y-1/2 md:left-[64%] md:top-[52%] lg:left-[68%]"
-            style={{ opacity: sOp, z: sZ, y: sY }}
+            data-chapter="wheel"
+            aria-hidden="true"
+            className="absolute left-1/2 top-[52%] -translate-x-1/2 -translate-y-1/2 md:left-[56%]"
+            style={{ opacity: wOp, z: wZ, y: wY }}
           >
-            <StackRing sp={sp} />
+            <SkillsRing />
           </motion.div>
 
           {/* ch.3 — editor */}

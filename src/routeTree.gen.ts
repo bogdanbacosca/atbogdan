@@ -24,9 +24,9 @@ const ContactRoute = ContactRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const PortofoliuIndexRoute = PortofoliuIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => PortofoliuRoute,
+  id: '/portofoliu/',
+  path: '/portofoliu/',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -56,6 +56,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContactRoute: typeof ContactRoute
+  PortofoliuIndexRoute: typeof PortofoliuIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -76,10 +77,10 @@ declare module '@tanstack/react-router' {
     }
     '/portofoliu/': {
       id: '/portofoliu/'
-      path: '/'
+      path: '/portofoliu'
       fullPath: '/portofoliu/'
       preLoaderRoute: typeof PortofoliuIndexRouteImport
-      parentRoute: typeof PortofoliuRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -87,6 +88,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactRoute: ContactRoute,
+  PortofoliuIndexRoute: PortofoliuIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

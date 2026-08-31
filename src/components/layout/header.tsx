@@ -42,11 +42,11 @@ export function Header() {
       <div className="mx-auto flex h-16 max-w-[1240px] items-center justify-between px-5 md:h-[4.5rem] md:px-8 lg:px-12">
         <Link to="/" aria-label={site.name} className="relative z-50">
           <img
-            src={site.logo}
+            src="/brand/logo-mark.svg"
             alt={site.name}
-            width={180}
-            height={41}
-            className="h-8 w-auto md:h-9"
+            width={38}
+            height={38}
+            className="logo-animate h-9 w-auto md:h-10"
           />
         </Link>
 

@@ -9,7 +9,7 @@ export function Footer() {
     <footer className="relative z-10 border-t border-border bg-bg">
       <div className="mx-auto grid max-w-[1240px] gap-10 px-5 py-12 md:grid-cols-2 md:px-8 md:py-16 lg:grid-cols-4 lg:px-12">
         <div className="lg:col-span-2">
-          <img src={site.logo} alt={site.name} className="h-9 w-auto" />
+          <img src={site.logo} alt={site.name} className="h-12 w-auto md:h-14" />
           <p className="mt-4 max-w-md text-sm leading-relaxed text-muted">
             <AnimatedText text={site.tagline} stagger={0.01} />
           </p>

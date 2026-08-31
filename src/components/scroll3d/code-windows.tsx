@@ -102,69 +102,6 @@ export function TerminalWindow({ sp }: { sp: MotionValue<number> }) {
 }
 
 /* ------------------------------------------------------------------ */
-/* Ch. 2 — 3D tech-card carousel                                       */
-/* ------------------------------------------------------------------ */
-
-const STACK = [
-  { label: "HTML5", tint: "text-primary" },
-  { label: "CSS3", tint: "text-blush" },
-  { label: "JS", tint: "text-cream" },
-  { label: "React", tint: "text-primary" },
-  { label: "Tailwind", tint: "text-blush" },
-  { label: "Git", tint: "text-cream" },
-  { label: "SEO", tint: "text-primary" },
-  { label: "Meta", tint: "text-blush" },
-] as const;
-
-function StackCard({
-  label,
-  tint,
-  index,
-  total,
-}: {
-  label: string;
-  tint: string;
-  index: number;
-  total: number;
-}) {
-  const angle = (index / total) * 360;
-  return (
-    <div
-      aria-hidden="true"
-      className="absolute top-1/2 left-1/2 flex h-20 w-20 flex-col items-center justify-center gap-1 rounded-2xl border border-border-strong bg-bg-elevated/95 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.85),inset_0_1px_0_color-mix(in_oklab,white_8%,transparent)] will-change-transform md:h-24 md:w-24"
-      style={{
-        transform: `translate(-50%, -50%) rotateY(${angle}deg) translateZ(var(--ring-r))`,
-      }}
-    >
-      <span className={cn("font-display text-lg leading-none md:text-xl", tint)}>{label}</span>
-      <span className="text-[10px] tracking-[0.14em] text-muted uppercase">tile</span>
-    </div>
-  );
-}
-
-export function StackRing({ sp }: { sp: MotionValue<number> }) {
-  const spin = useTransform(sp, [0.215, 0.445], [60, -160]);
-  return (
-    <div className="relative">
-      <motion.div
-        className="stack-ring absolute top-1/2 left-1/2 h-[460px] w-[460px] -translate-x-1/2 -translate-y-1/2"
-        style={{
-          transformStyle: "preserve-3d",
-          WebkitTransformStyle: "preserve-3d",
-          rotateX: -14,
-          rotateY: spin,
-        }}
-        aria-hidden="true"
-      >
-        {STACK.map((item, i) => (
-          <StackCard key={item.label} label={item.label} tint={item.tint} index={i} total={STACK.length} />
-        ))}
-      </motion.div>
-    </div>
-  );
-}
-
-/* ------------------------------------------------------------------ */
 /* Ch. 3 — Code editor (services.ts)                                   */
 /* ------------------------------------------------------------------ */
 
