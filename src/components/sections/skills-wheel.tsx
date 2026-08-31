@@ -6,24 +6,24 @@ import { cn } from "@/lib/utils";
  * those two sections creates a visual gutter where the ring shines through, so
  * it reads as part of the page instead of an isolated band.
  *
- * Every card shows the skill name plus a short, real description — the stack
- * itself comes straight from this project (React, TanStack, Tailwind, Vite,
- * Node.js…).
+ * Every card shows one core web technology — the fundamentals plus the tools
+ * actually used to build this project — with a short, real description.
+ * Services live in the marquee band instead.
  */
 
 const STACK = [
-  { label: "HTML5", tint: "text-primary", tag: "structură semantică" },
-  { label: "CSS3", tint: "text-blush", tag: "layout & animații" },
-  { label: "JS", tint: "text-cream", tag: "interactivitate" },
-  { label: "TypeScript", tint: "text-primary", tag: "types la scară" },
-  { label: "React", tint: "text-cream", tag: "interfețe dinamice" },
-  { label: "Tailwind", tint: "text-blush", tag: "stilare rapidă" },
-  { label: "Vite", tint: "text-primary", tag: "build instant" },
-  { label: "Node.js", tint: "text-cream", tag: "backend & tooling" },
-  { label: "TanStack", tint: "text-blush", tag: "router + query" },
-  { label: "Git", tint: "text-primary", tag: "versionare curată" },
-  { label: "SEO", tint: "text-blush", tag: "vizibilitate Google" },
-  { label: "Meta", tint: "text-cream", tag: "certificat front-end" },
+  { label: "HTML5", tint: "text-cream", tag: "structură semantică" },
+  { label: "CSS", tint: "text-primary", tag: "layout & animații" },
+  { label: "JavaScript", tint: "text-blush", tag: "interactivitate" },
+  { label: "TypeScript", tint: "text-cream", tag: "types la scară" },
+  { label: "React", tint: "text-primary", tag: "UI · React 19" },
+  { label: "Tailwind", tint: "text-blush", tag: "v4 · design tokens" },
+  { label: "GSAP", tint: "text-cream", tag: "animații premium" },
+  { label: "TanStack", tint: "text-primary", tag: "router + query" },
+  { label: "Node.js", tint: "text-blush", tag: "backend & tooling" },
+  { label: "Vite", tint: "text-cream", tag: "build instant" },
+  { label: "Motion", tint: "text-primary", tag: "animații fluide" },
+  { label: "Git", tint: "text-blush", tag: "versionare · GitHub" },
 ] as const;
 
 function StackCard({

@@ -284,23 +284,72 @@
   }
 }
 
-/* Footer brand lockup: a slow "breathing" glow so the wordmark feels alive
-   like the spinning header mark, without rotating a wide logo. */
-@keyframes footer-logo-pulse {
+/* Footer brand lockup: a living, premium treatment without rotating the wide
+   wordmark — the logo breathes with a red glow while a diagonal light sweep
+   periodically glides across the letters. */
+@keyframes footer-logo-breathe {
   0%,
   100% {
+    transform: scale(1);
     filter: drop-shadow(0 0 0px color-mix(in oklab, var(--color-primary) 0%, transparent));
   }
   50% {
-    filter: drop-shadow(0 0 16px color-mix(in oklab, var(--color-primary) 42%, transparent));
+    transform: scale(1.035);
+    filter: drop-shadow(0 0 24px color-mix(in oklab, var(--color-primary) 60%, transparent));
   }
 }
-.footer-logo {
-  animation: footer-logo-pulse 7s ease-in-out infinite;
-  will-change: filter;
+.footer-logo-wrap {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 6px;
+  isolation: isolate;
+  line-height: 0;
+  animation: footer-logo-breathe 6s ease-in-out infinite;
+  will-change: transform, filter;
+}
+.footer-logo-wrap .footer-logo {
+  display: block;
+}
+/* Sweep shine clipped to the logo's own alpha channel. The overlay is a full
+   wrapper-sized layer whose background gradient slides across, while the same
+   brand SVG masks it — so it only ever renders on the wordmark's pixels, never
+   on the dark background around it. */
+@keyframes footer-shine-sweep {
+  0% {
+    background-position: 140% 0;
+  }
+  55%,
+  100% {
+    background-position: -270% 0;
+  }
+}
+.footer-logo-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image: linear-gradient(
+    100deg,
+    transparent 0%,
+    color-mix(in oklab, white 18%, transparent) 45%,
+    transparent 100%
+  );
+  background-repeat: no-repeat;
+  background-size: 300% 100%;
+  -webkit-mask-image: url("/brand/logo.svg");
+  mask-image: url("/brand/logo.svg");
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  animation: footer-shine-sweep 5s ease-in-out infinite;
+  pointer-events: none;
+  mix-blend-mode: screen;
 }
 @media (prefers-reduced-motion: reduce) {
-  .footer-logo {
+  .footer-logo-wrap,
+  .footer-logo-wrap::after {
     animation: none;
   }
 }
