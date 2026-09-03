@@ -1,6 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { animate, motion, useMotionValue } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { FadeUp } from "@/components/motion/fade-up";
 import { Magnetic } from "@/components/motion/magnetic";
@@ -11,13 +12,48 @@ export function Header() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const lastScrollY = useRef(0);
+  const velocity = useRef(0);
+  const logoRotation = useMotionValue(0);
+  const stopTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => {
+      const currentY = window.scrollY;
+      const delta = currentY - lastScrollY.current;
+      velocity.current = delta;
+      lastScrollY.current = currentY;
+
+      // Telephone dial: rotate based on scroll delta (slow, smooth)
+      const rotationAmount = delta * 0.8;
+      logoRotation.set(logoRotation.get() + rotationAmount);
+
+      // Clear any pending stop timeout
+      if (stopTimeout.current) {
+        clearTimeout(stopTimeout.current);
+      }
+
+      // Set timeout to snap back quickly when scrolling stops
+      stopTimeout.current = setTimeout(() => {
+        animate(logoRotation, 0, { duration: 0.3, ease: "easeOut" });
+      }, 200);
+
+      setScrolled(currentY > 8);
+    };
+
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (stopTimeout.current) {
+        clearTimeout(stopTimeout.current);
+      }
+    };
+  }, [logoRotation]);
 
   useEffect(() => {
     setOpen(false);
@@ -40,13 +76,19 @@ export function Header() {
       )}
     >
       <div className="mx-auto flex h-16 max-w-[1240px] items-center justify-between px-5 md:h-[4.5rem] md:px-8 lg:px-12">
-        <Link to="/" aria-label={site.name} className="relative z-50">
-          <img
+        <Link
+          to="/"
+          aria-label={site.name}
+          className="relative z-50 cursor-pointer"
+          onClick={scrollToTop}
+        >
+          <motion.img
             src="/brand/logo-mark.svg"
             alt={site.name}
             width={38}
             height={38}
-            className="logo-animate h-9 w-auto md:h-10"
+            className="h-9 w-auto md:h-10"
+            style={{ rotate: logoRotation }}
           />
         </Link>
 
