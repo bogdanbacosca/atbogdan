@@ -266,58 +266,96 @@
   }
 }
 
-/* Footer brand lockup: a living, premium treatment without rotating the wide
-   wordmark — the logo breathes with a red glow while a diagonal light sweep
-   periodically glides across the letters. */
-@keyframes footer-logo-breathe {
+/* Footer brand lockup: an atmospheric ember treatment that lives IN the dark
+   red background — the logo breathes with layered crimson halos that emanate
+   into the surrounding darkness, while a warm golden-cream shimmer glides
+   across the letters as if lit from within. */
+@keyframes footer-logo-ember {
   0%,
   100% {
-    transform: scale(1);
-    filter: drop-shadow(0 0 0px color-mix(in oklab, var(--color-primary) 0%, transparent));
+    transform: scale(1) translateY(0);
+    filter: drop-shadow(0 0 4px color-mix(in oklab, var(--color-primary) 18%, transparent))
+      drop-shadow(0 0 16px color-mix(in oklab, var(--color-primary) 10%, transparent));
   }
   50% {
-    transform: scale(1.06);
-    filter: drop-shadow(0 0 12px color-mix(in oklab, var(--color-primary) 90%, transparent))
-      drop-shadow(0 0 46px color-mix(in oklab, var(--color-primary) 72%, transparent));
+    transform: scale(1.025) translateY(-3px);
+    filter: drop-shadow(0 0 10px color-mix(in oklab, var(--color-primary) 40%, transparent))
+      drop-shadow(0 0 30px color-mix(in oklab, var(--color-primary) 22%, transparent))
+      drop-shadow(0 0 56px color-mix(in oklab, var(--color-primary) 10%, transparent));
   }
 }
 .footer-logo-wrap {
   position: relative;
   display: inline-block;
-  overflow: hidden;
+  overflow: visible;
   border-radius: 6px;
   isolation: isolate;
   line-height: 0;
-  animation: footer-logo-breathe 4.5s ease-in-out infinite;
+  animation: footer-logo-ember 5s ease-in-out infinite;
   will-change: transform, filter;
 }
 .footer-logo-wrap .footer-logo {
   display: block;
+  position: relative;
+  z-index: 1;
 }
-/* Sweep shine clipped to the logo's own alpha channel. The overlay is a full
-   wrapper-sized layer whose background gradient slides across, while the same
-   brand SVG masks it — so it only ever renders on the wordmark's pixels, never
-   on the dark background around it. */
+/* Ambient halo behind the logo — a soft radial glow that breathes in tandem,
+   creating depth by bleeding warm light into the dark background. */
+@keyframes footer-logo-halo {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.92);
+  }
+  50% {
+    opacity: 0.65;
+    transform: scale(1.08);
+  }
+}
+.footer-logo-wrap::before {
+  content: "";
+  position: absolute;
+  inset: -25%;
+  z-index: -1;
+  background: radial-gradient(
+    ellipse 55% 48% at center,
+    color-mix(in oklab, var(--color-primary) 28%, transparent) 0%,
+    color-mix(in oklab, var(--color-primary) 10%, transparent) 38%,
+    transparent 68%
+  );
+  opacity: 0.5;
+  animation: footer-logo-halo 5s ease-in-out infinite;
+  pointer-events: none;
+  filter: blur(10px);
+}
+/* Warm shimmer sweep — golden-cream tones that harmonize with the dark red
+   background rather than fighting it. Clipped to the logo's own alpha via
+   mask-image so it only renders on the wordmark's pixels. */
 @keyframes footer-shine-sweep {
   0% {
-    background-position: 115% 0;
+    background-position: 120% 0;
+    opacity: 0.4;
   }
-  55%,
+  50% {
+    opacity: 0.85;
+  }
+  80%,
   100% {
-    background-position: -20% 0;
+    background-position: -25% 0;
+    opacity: 0.4;
   }
 }
 .footer-logo-wrap::after {
   content: "";
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 2;
   background-image: linear-gradient(
-    100deg,
+    105deg,
     transparent 0%,
-    color-mix(in oklab, white 14%, transparent) 38%,
-    color-mix(in oklab, white 48%, transparent) 48%,
-    color-mix(in oklab, white 14%, transparent) 58%,
+    color-mix(in oklab, var(--color-blush) 22%, transparent) 36%,
+    color-mix(in oklab, var(--color-cream) 45%, transparent) 47%,
+    color-mix(in oklab, var(--color-primary) 28%, transparent) 54%,
     transparent 100%
   );
   background-repeat: no-repeat;
@@ -328,12 +366,13 @@
   mask-size: 100% 100%;
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
-  animation: footer-shine-sweep 4s ease-in-out infinite;
+  animation: footer-shine-sweep 6s ease-in-out infinite;
   pointer-events: none;
   mix-blend-mode: screen;
 }
 @media (prefers-reduced-motion: reduce) {
   .footer-logo-wrap,
+  .footer-logo-wrap::before,
   .footer-logo-wrap::after {
     animation: none;
   }

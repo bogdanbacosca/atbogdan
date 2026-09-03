@@ -10,13 +10,13 @@ export function Footer() {
       <div className="mx-auto grid max-w-[1240px] gap-10 px-5 py-12 md:grid-cols-2 md:px-8 md:py-16 lg:grid-cols-4 lg:px-12">
         <div className="lg:col-span-2">
           <FadeUp delay={0} y={10}>
-            <span className="footer-logo-wrap">
+            <Link to="/" aria-label="Back to top" className="footer-logo-wrap">
               <img
                 src="/brand/logo.svg"
                 alt={site.name}
                 className="footer-logo h-12 w-auto md:h-14"
               />
-            </span>
+            </Link>
           </FadeUp>
           <p className="footer-tagline mt-4 max-w-md text-sm leading-relaxed text-muted">
             <AnimatedText text={site.tagline} stagger={0.01} />
