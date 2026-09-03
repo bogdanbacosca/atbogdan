@@ -321,15 +321,6 @@ function StackChapter() {
             <AnimatedText text={about.body} delay={0.2} stagger={0.008} />
           </p>
 
-          <div className="mt-6 flex flex-wrap gap-2">
-            {skills.map((skill, i) => (
-              <FadeUp key={skill} delay={0.15 + i * 0.04} y={6}>
-                <span className="inline-block rounded-full border border-border bg-bg-elevated px-3.5 py-1.5 font-mono text-xs text-cream/85">
-                  {skill}
-                </span>
-              </FadeUp>
-            ))}
-          </div>
         </Panel>
       </div>
       <div className="mt-12 flex flex-col items-center justify-center gap-7 md:mt-0 md:gap-10">
@@ -443,7 +434,7 @@ function PortfolioChapter() {
                     loading="lazy"
                   />
                   <span className="font-mono text-sm text-muted">{project.year}</span>
-                  <span className="flex-1 text-sm font-medium text-cream group-hover:text-blush md:text-base">
+                  <span className="flex-1 truncate text-sm font-medium text-cream group-hover:text-blush md:text-base">
                     {project.domain}
                   </span>
                   <ArrowUpRight className="size-4 shrink-0 text-primary transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

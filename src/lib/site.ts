@@ -86,21 +86,6 @@ export const services = [
   },
 ] as const;
 
-export const skills = [
-  "HTML",
-  "CSS",
-  "JavaScript",
-  "UI/UX",
-  "Web Design",
-  "SEO",
-  "Design Grafic",
-  "WordPress",
-  "Front-End",
-  "Identitate vizuală",
-  "Content",
-  "Promovare",
-] as const;
-
 export type Project = {
   slug: string;
   domain: string;

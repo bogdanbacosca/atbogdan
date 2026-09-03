@@ -220,9 +220,10 @@ export function GitWindow({ sp }: { sp: MotionValue<number> }) {
           {commits.map((c) => (
             <RevealLine key={c.hash} sp={sp} from={c.from} to={c.to} className="relative pl-6">
               <span className={cn("absolute top-1/2 left-0 size-2.5 -translate-y-1/2 rounded-full", c.dot)} />
-              <span className={cn("font-mono", c.cls)}>
-                <span className="text-primary">{c.hash}</span> {c.feat}
-                <span className="ml-2 text-xs text-muted">[{c.year}]</span>
+              <span className={cn("flex font-mono", c.cls)}>
+                <span className="shrink-0 text-primary">{c.hash}</span>
+                <span className="truncate">{c.feat}</span>
+                <span className="ml-2 shrink-0 text-xs text-muted">[{c.year}]</span>
               </span>
             </RevealLine>
           ))}
