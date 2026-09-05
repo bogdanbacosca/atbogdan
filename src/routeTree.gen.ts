@@ -10,12 +10,20 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as PortofoliuIndexRouteImport } from './routes/portofoliu.index'
+import { Route as ApiEmailsSendRouteImport } from './routes/api/emails/send'
+import { Route as ApiWebhooksResendRouteImport } from './routes/api/webhooks/resend'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -28,35 +36,76 @@ const PortofoliuIndexRoute = PortofoliuIndexRouteImport.update({
   path: '/portofoliu/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiEmailsSendRoute = ApiEmailsSendRouteImport.update({
+  id: '/api/emails/send',
+  path: '/api/emails/send',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiWebhooksResendRoute = ApiWebhooksResendRouteImport.update({
+  id: '/api/webhooks/resend',
+  path: '/api/webhooks/resend',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/contact': typeof ContactRoute
   '/portofoliu/': typeof PortofoliuIndexRoute
+  '/api/emails/send': typeof ApiEmailsSendRoute
+  '/api/webhooks/resend': typeof ApiWebhooksResendRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/contact': typeof ContactRoute
   '/portofoliu': typeof PortofoliuIndexRoute
+  '/api/emails/send': typeof ApiEmailsSendRoute
+  '/api/webhooks/resend': typeof ApiWebhooksResendRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/contact': typeof ContactRoute
   '/portofoliu/': typeof PortofoliuIndexRoute
+  '/api/emails/send': typeof ApiEmailsSendRoute
+  '/api/webhooks/resend': typeof ApiWebhooksResendRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/contact' | '/portofoliu/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/contact'
+    | '/portofoliu/'
+    | '/api/emails/send'
+    | '/api/webhooks/resend'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contact' | '/portofoliu'
-  id: '__root__' | '/' | '/contact' | '/portofoliu/'
+  to:
+    | '/'
+    | '/admin'
+    | '/contact'
+    | '/portofoliu'
+    | '/api/emails/send'
+    | '/api/webhooks/resend'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/contact'
+    | '/portofoliu/'
+    | '/api/emails/send'
+    | '/api/webhooks/resend'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
   ContactRoute: typeof ContactRoute
   PortofoliuIndexRoute: typeof PortofoliuIndexRoute
+  ApiEmailsSendRoute: typeof ApiEmailsSendRoute
+  ApiWebhooksResendRoute: typeof ApiWebhooksResendRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -66,6 +115,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -82,13 +138,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortofoliuIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/emails/send': {
+      id: '/api/emails/send'
+      path: '/api/emails/send'
+      fullPath: '/api/emails/send'
+      preLoaderRoute: typeof ApiEmailsSendRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/webhooks/resend': {
+      id: '/api/webhooks/resend'
+      path: '/api/webhooks/resend'
+      fullPath: '/api/webhooks/resend'
+      preLoaderRoute: typeof ApiWebhooksResendRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
   ContactRoute: ContactRoute,
   PortofoliuIndexRoute: PortofoliuIndexRoute,
+  ApiEmailsSendRoute: ApiEmailsSendRoute,
+  ApiWebhooksResendRoute: ApiWebhooksResendRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
