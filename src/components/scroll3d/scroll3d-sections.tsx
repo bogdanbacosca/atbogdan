@@ -7,7 +7,7 @@ import { Magnetic } from "@/components/motion/magnetic";
 import { Button } from "@/components/ui/button";
 import { CustomCodeGlyph, PenToolGlyph, PulseIcon, ResponsiveGlyph } from "@/components/scroll3d/animated-svg";
 import { SkillsMarquee } from "@/components/sections/skills-marquee";
-import { about, cta, differentiators, hero, projects, services, site, skills } from "@/lib/site";
+import { about, cta, differentiators, hero, projects, services, site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 /* ------------------------------------------------------------------ */

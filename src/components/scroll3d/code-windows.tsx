@@ -209,7 +209,7 @@ export function EditorWindow({ sp }: { sp: MotionValue<number> }) {
 export function GitWindow({ sp }: { sp: MotionValue<number> }) {
   const commits = [
     { from: 0.692, to: 0.708, dot: "bg-primary", hash: "9f3ab2a", feat: "feat: site cristinahorga.ro", year: "2025", cls: "text-cream/95" },
-    { from: 0.708, to: 0.724, dot: "bg-blush/80", hash: "1c8e7d0", feat: "feat: blog vacantesmart.eu", year: "2025", cls: "text-cream/80" },
+    { from: 0.708, to: 0.724, dot: "bg-blush/80", hash: "1c8e7d0", feat: "feat: app comenzi (React + Supabase)", year: "2025", cls: "text-cream/80" },
     { from: 0.724, to: 0.74, dot: "bg-cream/60", hash: "b2a5f19", feat: "fix: reparatiimasinispalat.eu", year: "2025", cls: "text-cream/70" },
   ];
   return (
