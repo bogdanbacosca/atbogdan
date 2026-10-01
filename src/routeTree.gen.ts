@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as PortofoliuIndexRouteImport } from './routes/portofoliu.index'
+import { Route as ApiWebhooksResendRouteImport } from './routes/api/webhooks/resend'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,35 +29,44 @@ const PortofoliuIndexRoute = PortofoliuIndexRouteImport.update({
   path: '/portofoliu/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiWebhooksResendRoute = ApiWebhooksResendRouteImport.update({
+  id: '/api/webhooks/resend',
+  path: '/api/webhooks/resend',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/portofoliu/': typeof PortofoliuIndexRoute
+  '/api/webhooks/resend': typeof ApiWebhooksResendRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/portofoliu': typeof PortofoliuIndexRoute
+  '/api/webhooks/resend': typeof ApiWebhooksResendRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/portofoliu/': typeof PortofoliuIndexRoute
+  '/api/webhooks/resend': typeof ApiWebhooksResendRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/contact' | '/portofoliu/'
+  fullPaths: '/' | '/contact' | '/portofoliu/' | '/api/webhooks/resend'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contact' | '/portofoliu'
-  id: '__root__' | '/' | '/contact' | '/portofoliu/'
+  to: '/' | '/contact' | '/portofoliu' | '/api/webhooks/resend'
+  id: '__root__' | '/' | '/contact' | '/portofoliu/' | '/api/webhooks/resend'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContactRoute: typeof ContactRoute
   PortofoliuIndexRoute: typeof PortofoliuIndexRoute
+  ApiWebhooksResendRoute: typeof ApiWebhooksResendRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +92,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortofoliuIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/webhooks/resend': {
+      id: '/api/webhooks/resend'
+      path: '/api/webhooks/resend'
+      fullPath: '/api/webhooks/resend'
+      preLoaderRoute: typeof ApiWebhooksResendRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactRoute: ContactRoute,
   PortofoliuIndexRoute: PortofoliuIndexRoute,
+  ApiWebhooksResendRoute: ApiWebhooksResendRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
